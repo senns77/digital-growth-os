@@ -3,1669 +3,278 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>55yr Real Estate Data — Tall Bridge Real Estate</title>
+<title>Digital Growth OS — Free Website Audit</title>
 <style>
-/* ── RESET & BASE ───────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0b1828;--navy2:#0f2035;--navy3:#152840;
-  --gold:#c8a46e;--gold2:#e8c88a;--gold-lt:#f5ecd8;
-  --green:#1b6b3a;--green-lt:#e8f5ed;
-  --red:#a32d2d;--red-lt:#fcebeb;
-  --amber:#ba7517;--amber-lt:#fdf0d5;
-  --text:#e8e2d5;--text2:#b8c4d0;--text3:#7a8898;
-  --border:#1e2a38;--border2:#2a3850;
+  --black:#0D0D0D;--black2:#141414;--black3:#1a1a1a;
+  --orange:#E85A1C;--orange2:#ff6a2a;
+  --white:#FAFAF8;--gray:#999;--gray2:#555;
+  --green:#1A7F4E;--green-bg:#EDFAF3;
+  --red:#C0392B;--red-bg:#FEF0EE;
+  --warn:#C47A1A;--warn-bg:#FEF8EC;
+  --border:#222;
 }
 html{scroll-behavior:smooth}
-body{background:var(--navy);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+body{background:var(--black);color:var(--white);font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden;line-height:1.6}
 
-/* ── NAV ────────────────────────────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,24,40,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 36px;height:52px;display:flex;align-items:center;justify-content:space-between}
-.nav-brand{display:flex;align-items:center;gap:10px}
-.nav-brand .logo{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
-.nav-brand .sub{font-size:10px;color:var(--text3);letter-spacing:.06em}
-.nav-links{display:flex;gap:4px}
-.nav-links a{font-size:10px;color:var(--text3);text-decoration:none;padding:5px 10px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase;transition:all .18s}
-.nav-links a:hover{color:var(--gold);background:rgba(200,164,110,.08)}
-.nav-cta{background:var(--gold);color:#07090f;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:3px;text-decoration:none;transition:all .18s}
-.nav-cta:hover{background:var(--gold2)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;background:var(--orange);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;letter-spacing:.02em;flex-shrink:0}
+.logo-text{font-weight:700;font-size:14px;color:var(--white)}
+.logo-sub{font-size:10px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
+.nav-cta{background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 18px;border-radius:4px;text-decoration:none;transition:background .18s}
+.nav-cta:hover{background:var(--orange2)}
 
-/* ── HERO ────────────────────────────────────────────────────────────────────── */
-#hero{padding:120px 36px 80px;background:linear-gradient(160deg,#0b1828 0%,#111f35 60%,#0b1828 100%);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
-#hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 70% 40%,rgba(200,164,110,.06) 0%,transparent 65%);pointer-events:none}
-.hero-tag{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,164,110,.35);border-radius:2px;padding:4px 12px;margin-bottom:20px}
-#hero h1{font-size:clamp(28px,4.5vw,58px);font-weight:800;color:#f0e8d8;line-height:1.1;letter-spacing:-.02em;max-width:800px;margin-bottom:20px}
-#hero h1 span{color:var(--gold)}
-.hero-sub{font-size:clamp(13px,1.5vw,17px);color:var(--text2);max-width:620px;line-height:1.7;margin-bottom:36px}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{background:var(--gold);color:#07090f;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;border-radius:3px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
-.btn-secondary{background:transparent;color:var(--text2);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;border-radius:3px;border:1px solid var(--border2);text-decoration:none;transition:all .2s}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
-.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:56px;max-width:780px}
-.h-stat{background:var(--navy2);padding:18px 20px}
-.h-stat .num{font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--gold);letter-spacing:-.01em;line-height:1}
-.h-stat .lbl{font-size:9px;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-top:5px;line-height:1.4}
+/* HERO */
+#hero{padding:110px 24px 80px;max-width:780px;margin:0 auto;text-align:center}
+.hero-tag{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(232,90,28,.35);border-radius:20px;padding:4px 14px;margin-bottom:24px}
+#hero h1{font-size:clamp(28px,5vw,52px);font-weight:800;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+#hero h1 span{color:var(--orange)}
+.hero-sub{font-size:clamp(15px,2vw,19px);color:#aaa;max-width:540px;margin:0 auto 36px;line-height:1.65}
 
-/* ── SECTION SCAFFOLDING ─────────────────────────────────────────────────────── */
-section{padding:72px 36px}
-.section-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.section-title{font-size:clamp(22px,3vw,34px);font-weight:800;color:#f0e8d8;line-height:1.2;margin-bottom:14px;letter-spacing:-.01em}
-.section-sub{font-size:14px;color:var(--text2);max-width:680px;line-height:1.7;margin-bottom:40px}
-.divider{border:none;border-top:1px solid var(--border);margin:0}
+/* URL FORM */
+.url-form{display:flex;gap:0;max-width:540px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px var(--border)}
+.url-form input{flex:1;background:var(--black2);border:none;color:var(--white);font-size:15px;padding:14px 18px;outline:none;font-family:inherit}
+.url-form input::placeholder{color:var(--gray2)}
+.url-form button{background:var(--orange);color:#fff;border:none;font-size:13px;font-weight:700;letter-spacing:.04em;padding:14px 22px;cursor:pointer;white-space:nowrap;transition:background .18s;font-family:inherit}
+.url-form button:hover{background:var(--orange2)}
+.form-confirm{display:none;margin-top:14px;font-size:14px;color:#50b880;font-weight:600;text-align:center}
+.form-confirm.show{display:block}
 
-/* ── CHART SECTION ────────────────────────────────────────────────────────────── */
-#chart-section{background:var(--navy);padding:0}
-.chart-header{padding:40px 36px 0}
+/* SECTION SCAFFOLDING */
+section{padding:72px 24px}
+.section-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;text-align:center}
+.section-title{font-size:clamp(22px,3vw,34px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:12px;letter-spacing:-.01em;text-align:center}
+.section-sub{font-size:15px;color:#aaa;max-width:580px;margin:0 auto 44px;line-height:1.7;text-align:center}
+hr.div{border:none;border-top:1px solid var(--border)}
 
-/* Inject chart styles with namespacing adjustments */
+/* PROBLEM CARDS */
+#problems{background:var(--black2)}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:900px;margin:0 auto}
+.p-card{background:var(--black3);padding:28px 26px}
+.p-icon{font-size:28px;margin-bottom:14px}
+.p-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px}
+.p-body{font-size:13px;color:#aaa;line-height:1.65}
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body.__chartbody{background:#07090f;color:#e8e2d5;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-.header{padding:28px 36px 16px;border-bottom:1px solid #1a2030}
-.header h1{font-size:clamp(16px,2.4vw,30px);font-weight:800;color:#f0e8d8;line-height:1.2;letter-spacing:-.01em}
-.header p{font-size:10px;color:#6a7585;margin-top:6px;letter-spacing:.07em;text-transform:uppercase}
+/* AUDIT PREVIEW */
+#preview{background:var(--black)}
+.preview-wrap{max-width:580px;margin:0 auto;background:var(--black2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.preview-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.preview-header .dot{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.preview-header .label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.audit-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1a1a1a}
+.audit-row:last-child{border-bottom:none}
+.audit-name{font-size:13px;color:var(--white);font-weight:500}
+.badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em}
+.badge.pass{background:var(--green-bg);color:var(--green)}
+.badge.warn{background:var(--warn-bg);color:var(--warn)}
+.badge.fail{background:var(--red-bg);color:var(--red)}
+.preview-footer{padding:14px 20px;background:#111;border-top:1px solid var(--border);font-size:11px;color:var(--gray);text-align:center}
 
-/* LAYER BUTTONS */
-.controls{padding:10px 36px 0;border-bottom:1px solid #1a2030}
-.ctrl-row{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px;align-items:center}
-.ctrl-label{font-size:9px;color:#4a5565;letter-spacing:.1em;text-transform:uppercase;margin-right:4px;white-space:nowrap}
-.lbtn{padding:6px 13px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:#5a6575;border:1px solid #2a3540;border-radius:3px;transition:all .18s;user-select:none;background:#0d1520;white-space:nowrap}
-.lbtn:hover{border-color:#445566;color:#9aabb8}
-.lbtn.on{color:#07090f;border-color:transparent;font-weight:700}
-.lbtn[data-layer="war"].on    {background:#e06060}
-.lbtn[data-layer="econ"].on   {background:#d45555}
-.lbtn[data-layer="policy"].on {background:#e8c44a;color:#1a1200}
-.lbtn[data-layer="geo"].on    {background:#b478dc}
-.lbtn[data-layer="scale"].on  {background:#50b880}
-.lbtn[data-layer="inst"].on   {background:#c084fc}
-.lbtn[data-layer="infl"].on   {background:#f87171}
-.lbtn[data-layer="debt"].on   {background:#38bdf8;color:#001a2a}
-.lbtn[data-layer="boom"].on   {background:#fb923c;color:#1a0800}
-.lbtn[data-layer="med"].on    {background:#34d399;color:#001a10}
-.lbtn[data-layer="unemp"].on  {background:#a78bfa;color:#0d0020}
-.sep{width:1px;height:20px;background:#2a3540;margin:0 4px}
-.clear-btn{padding:5px 11px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:#8a9aaa;border:1px solid #2a3540;border-radius:3px;background:transparent;transition:all .18s}
-.clear-btn:hover{color:#e06060;border-color:#e06060}
-.all-btn{padding:5px 11px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:#8a9aaa;border:1px solid #2a3540;border-radius:3px;background:transparent;transition:all .18s}
-.all-btn:hover{color:#c8a46e;border-color:#c8a46e}
+/* CASE STUDY */
+#case{background:var(--black2)}
+.case-title{font-size:clamp(18px,2.5vw,26px);font-weight:800;color:var(--white);margin-bottom:6px;text-align:center;line-height:1.3}
+.case-sub{font-size:13px;color:var(--gray);text-align:center;margin-bottom:36px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:740px;margin:0 auto}
+@media(max-width:600px){.case-grid{grid-template-columns:1fr}}
+.case-col{background:var(--black3);border:1px solid var(--border);border-radius:8px;padding:24px}
+.case-col.before{border-top:3px solid var(--red)}
+.case-col.after{border-top:3px solid var(--green)}
+.col-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.case-col.before .col-label{color:var(--red)}
+.case-col.after .col-label{color:var(--green)}
+.case-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;font-size:13px;color:#ccc;line-height:1.5}
+.case-item:last-child{margin-bottom:0}
+.case-item .icon{flex-shrink:0;font-size:14px;margin-top:1px}
 
-.legend-bar{display:flex;gap:16px;padding:10px 36px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #1a2030}
-.leg{display:flex;align-items:center;gap:6px;font-size:9px;color:#7a8898;letter-spacing:.04em;text-transform:uppercase}
-.leg-sq{width:11px;height:11px;border-radius:2px;flex-shrink:0}
-.leg-circ{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.leg-line{width:22px;height:2px;border-radius:2px;flex-shrink:0}
-.leg-diam{width:10px;height:10px;transform:rotate(45deg);flex-shrink:0;border-radius:1px}
+/* HOW IT WORKS */
+#how{background:var(--black)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:700px;margin:0 auto}
+.step{text-align:center;padding:20px}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.step-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px}
+.step-body{font-size:13px;color:#aaa;line-height:1.6}
 
-.chart-wrap{padding:16px 36px 8px;position:relative}
-canvas{display:block;width:100%}
+/* BOTTOM CTA */
+#cta-bottom{background:var(--black2);padding:80px 24px;text-align:center}
+#cta-bottom h2{font-size:clamp(22px,3.5vw,38px);font-weight:800;color:var(--white);margin-bottom:12px;letter-spacing:-.01em}
+#cta-bottom p{font-size:15px;color:#aaa;margin-bottom:36px}
 
-.tooltip{position:fixed;background:#0d1220;border:1px solid #2a3850;border-radius:4px;padding:13px 16px;pointer-events:none;opacity:0;transition:opacity .12s;max-width:320px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.85)}
-.tooltip.show{opacity:1}
-.tt-ey{font-size:9px;color:#6a7585;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
-.tt-ti{font-size:14px;color:#f0e8d8;font-weight:700;margin-bottom:6px;line-height:1.3}
-.tt-bo{font-size:10.5px;color:#b8c4d0;line-height:1.6}
-.tt-tg{display:inline-block;margin-top:8px;font-size:9px;padding:3px 8px;border-radius:2px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:12px;color:var(--gray2)}
 
-.scale-section{padding:18px 36px 22px;background:#080b10;border-top:1px solid #131820}
-.scale-section h3{font-size:9px;color:#7a8898;letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px}
-.scale-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:10px}
-.sc-card{background:#0f1620;border:1px solid #1e2a38;border-radius:3px;padding:12px 14px;border-left:3px solid #333}
-.sc-head{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;flex-wrap:wrap}
-.sc-title{font-size:11px;font-weight:700;color:#f0e8d8}
-.sc-period{font-size:9px;margin-left:auto;letter-spacing:.05em;white-space:nowrap}
-.sc-body.__chartbody{font-size:10px;color:#b8c4d0;line-height:1.65}
-.sc-strats{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
-.strat-tag{font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.04em;font-weight:600}
-.sc-why{margin-top:6px;font-size:8.5px;color:#7a8898;font-style:italic}
-.footer{padding:10px 36px;font-size:8.5px;color:#4a5565;letter-spacing:.02em;border-top:1px solid #0f1420;line-height:1.7}
-
-
-/* ── THESIS CARDS ────────────────────────────────────────────────────────────── */
-#thesis{background:var(--navy2)}
-.thesis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-.t-card{background:var(--navy3);border:1px solid var(--border);border-radius:3px;padding:20px 22px;border-left:3px solid var(--gold)}
-.t-card.green{border-left-color:#50b880}
-.t-card.red{border-left-color:#f87171}
-.t-card.purple{border-left-color:#a78bfa}
-.t-card.amber{border-left-color:#fb923c}
-.t-num{font-size:clamp(24px,3vw,36px);font-weight:800;line-height:1;margin-bottom:6px}
-.t-card .t-num{color:var(--gold)}
-.t-card.green .t-num{color:#50b880}
-.t-card.red .t-num{color:#f87171}
-.t-card.purple .t-num{color:#a78bfa}
-.t-card.amber .t-num{color:#fb923c}
-.t-label{font-size:11px;font-weight:700;color:#f0e8d8;margin-bottom:6px;line-height:1.3}
-.t-body{font-size:11px;color:var(--text2);line-height:1.6}
-
-/* ── STRATEGY ────────────────────────────────────────────────────────────────── */
-#strategy{background:var(--navy)}
-.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-.s-card{background:var(--navy2);border:1px solid var(--border);border-radius:4px;padding:28px 28px;position:relative;overflow:hidden}
-.s-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.s-card.wholesale::before{background:var(--gold)}
-.s-card.hold::before{background:#50b880}
-.s-badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:14px}
-.s-card.wholesale .s-badge{background:rgba(200,164,110,.15);color:var(--gold)}
-.s-card.hold .s-badge{background:rgba(80,184,128,.15);color:#50b880}
-.s-title{font-size:18px;font-weight:800;color:#f0e8d8;margin-bottom:8px}
-.s-sub{font-size:12px;color:var(--text3);margin-bottom:18px;font-style:italic}
-.s-list{list-style:none;display:flex;flex-direction:column;gap:7px}
-.s-list li{font-size:11.5px;color:var(--text2);padding-left:14px;position:relative;line-height:1.5}
-.s-list li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:700}
-.s-card.hold .s-list li::before{color:#50b880}
-.flywheel{background:var(--navy3);border:1px solid var(--border);border-radius:4px;padding:20px;margin-top:16px;text-align:center}
-.flywheel-step{font-size:11px;color:var(--text2);padding:7px 0}
-.flywheel-arrow{color:var(--gold);font-size:14px;line-height:1}
-.flywheel-decision{background:rgba(200,164,110,.1);border:1px solid rgba(200,164,110,.25);border-radius:3px;padding:8px 12px;font-size:11px;color:var(--gold);font-weight:700;margin:4px 0}
-
-/* ── RETURNS CALCULATOR ──────────────────────────────────────────────────────── */
-#returns{background:var(--navy2)}
-.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px}
-@media(max-width:700px){.calc-wrap{grid-template-columns:1fr}}
-.calc-panel{background:var(--navy3);border:1px solid var(--border);border-radius:4px;padding:24px}
-.calc-title{font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:16px;letter-spacing:.02em}
-.calc-row{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
-.calc-row label{font-size:10px;color:var(--text3);letter-spacing:.07em;text-transform:uppercase}
-.calc-row select,.calc-row input[type=range]{width:100%;background:var(--navy2);border:1px solid var(--border2);border-radius:3px;color:var(--text);font-size:13px;padding:8px 10px;outline:none}
-.calc-row input[type=range]{padding:4px 0;accent-color:var(--gold)}
-.range-val{font-size:18px;font-weight:800;color:var(--gold);margin-top:2px}
-.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.r-box{background:var(--navy2);border:1px solid var(--border);border-radius:3px;padding:12px 14px;text-align:center}
-.r-num{font-size:22px;font-weight:800;color:var(--gold);line-height:1}
-.r-lbl{font-size:9px;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-top:4px}
-.r-box.green .r-num{color:#50b880}
-.r-box.blue .r-num{color:#38bdf8}
-.r-box.purple .r-num{color:#a78bfa}
-.note-text{font-size:10px;color:var(--text3);margin-top:12px;font-style:italic;line-height:1.5}
-
-/* ── MARKETS ──────────────────────────────────────────────────────────────────── */
-#markets{background:var(--navy)}
-.markets-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
-.m-card{background:var(--navy2);border:1px solid var(--border);border-radius:3px;padding:14px 16px}
-.m-tier1{border-top:2px solid #50b880}
-.m-tier2{border-top:2px solid var(--gold)}
-.m-city{font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:3px}
-.m-state{font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
-.m-row{display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px}
-.m-row .mk{color:var(--text3)}
-.m-row .mv{color:var(--text);font-weight:600}
-.m-row .mv.good{color:#50b880}
-.tier-label{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;display:inline-block;margin-bottom:10px}
-.tier1-lbl{background:rgba(80,184,128,.15);color:#50b880}
-.tier2-lbl{background:rgba(200,164,110,.15);color:var(--gold)}
-
-/* ── CAPITAL STRUCTURE ────────────────────────────────────────────────────────── */
-#capital{background:var(--navy2)}
-.waterfall{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:28px}
-.wf-tier{background:var(--navy3);padding:16px 18px}
-.wf-n{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
-.wf-trigger{font-size:11px;font-weight:700;color:#f0e8d8;margin-bottom:4px}
-.wf-dist{font-size:18px;font-weight:800;color:var(--gold)}
-.structures-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
-.st-card{background:var(--navy3);border:1px solid var(--border);border-radius:3px;padding:16px 18px}
-.st-name{font-size:12px;font-weight:700;color:#f0e8d8;margin-bottom:4px}
-.st-for{font-size:10px;color:var(--text3);margin-bottom:10px;font-style:italic}
-.st-row{display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px}
-.st-row .sk{color:var(--text3)}
-.st-row .sv{color:var(--text);font-weight:600}
-.st-row .sv.gold{color:var(--gold)}
-
-/* ── RISK TABLE ────────────────────────────────────────────────────────────────── */
-#risk{background:var(--navy)}
-.risk-table{width:100%;border-collapse:collapse;font-size:11.5px}
-.risk-table th{background:var(--navy3);color:var(--text3);font-size:9px;letter-spacing:.09em;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
-.risk-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.55}
-.risk-table tr:last-child td{border-bottom:none}
-.risk-table tr:nth-child(even) td{background:rgba(255,255,255,.015)}
-.risk-badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:2px}
-.rb-med{background:rgba(186,117,23,.18);color:#f59e0b}
-.rb-low{background:rgba(27,107,58,.18);color:#50b880}
-.rb-lm{background:rgba(186,117,23,.12);color:#e8a020}
-
-/* ── CTA / PARTNER ────────────────────────────────────────────────────────────── */
-#partner{background:var(--navy2);border-top:1px solid var(--border)}
-.partner-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:960px}
-@media(max-width:700px){.partner-inner{grid-template-columns:1fr}}
-.p-what{display:flex;flex-direction:column;gap:10px}
-.p-item{display:flex;gap:12px;align-items:flex-start}
-.p-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
-.p-item-text{font-size:12px;color:var(--text2);line-height:1.55}
-.p-item-text strong{color:#f0e8d8;font-weight:600}
-.form-wrap{background:var(--navy3);border:1px solid var(--border);border-radius:4px;padding:28px}
-.form-title{font-size:15px;font-weight:700;color:#f0e8d8;margin-bottom:18px}
-.f-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.f-row label{font-size:9px;color:var(--text3);letter-spacing:.09em;text-transform:uppercase}
-.f-row input,.f-row select,.f-row textarea{background:var(--navy2);border:1px solid var(--border2);border-radius:3px;color:var(--text);font-size:12px;padding:9px 12px;width:100%;outline:none;font-family:inherit;transition:border-color .18s}
-.f-row input:focus,.f-row select:focus,.f-row textarea:focus{border-color:var(--gold)}
-.f-row textarea{resize:vertical;min-height:80px}
-.f-submit{width:100%;background:var(--gold);color:#07090f;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px;border:none;border-radius:3px;cursor:pointer;transition:all .2s;margin-top:4px}
-.f-submit:hover{background:var(--gold2)}
-.f-note{font-size:9px;color:var(--text3);text-align:center;margin-top:10px;line-height:1.5}
-.f-success{display:none;text-align:center;padding:24px 0}
-.f-success .check{font-size:32px;color:#50b880;margin-bottom:10px}
-.f-success p{font-size:13px;color:var(--text2)}
-
-/* ── SITE FOOTER ──────────────────────────────────────────────────────────────── */
-footer.site-footer{background:var(--navy);border-top:1px solid var(--border);padding:24px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-footer.site-footer .brand{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
-footer.site-footer .disc{font-size:9px;color:var(--text3);max-width:600px;line-height:1.6}
-
-/* ── RESPONSIVE ─────────────────────────────────────────────────────────────── */
-@media(max-width:600px){
+/* RESPONSIVE */
+@media(max-width:540px){
+  .url-form{flex-direction:column;border-radius:8px}
+  .url-form input,.url-form button{border-radius:0;width:100%}
   nav{padding:0 16px}
-  .nav-links{display:none}
-  section,#hero{padding-left:16px;padding-right:16px}
-  .chart-header{padding:24px 16px 0}
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
-  <div class="nav-brand">
-    <span class="logo">Tall Bridge RE</span>
-    <span class="sub">Capital Partner Overview</span>
+  <div class="nav-logo">
+    <div class="logo-mark">DG</div>
+    <div>
+      <div class="logo-text">Digital Growth OS</div>
+      <div class="logo-sub">Website Audit Tool</div>
+    </div>
   </div>
-  <div class="nav-links">
-    <a href="#chart-section">Market Data</a>
-    <a href="#thesis">The Thesis</a>
-    <a href="#strategy">Strategy</a>
-    <a href="#returns">Returns</a>
-    <a href="#capital">Structure</a>
-    <a href="#partner">Partner With Us</a>
-  </div>
-  <a href="#partner" class="nav-cta">Express Interest</a>
+  <a href="#cta-bottom" class="nav-cta">Get Free Audit</a>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-tag">Capital Partner Overview &mdash; March 2026 &mdash; Confidential</div>
-  <h1>The <span>Fourth Major</span> Institutional Buying Window in 55 Years</h1>
-  <p class="hero-sub">Distressed lead acquisition, wholesale, and buy-and-hold portfolio growth in a historically rare convergence of motivated seller supply. Tall Bridge Real Estate has operated in U.S. off-market real estate for over a decade across thousands of transactions.</p>
-  <div class="hero-btns">
-    <a href="#chart-section" class="btn-primary">View 55yr Market Data ↓</a>
-    <a href="#partner" class="btn-secondary">Partner With Us</a>
+  <div class="hero-tag">Free 10-Point Website Audit</div>
+  <h1>Your Website Is <span>Losing You Business.</span> You Just Don't Know It Yet.</h1>
+  <p class="hero-sub">Your website has one job. Find out if it's actually doing it — free, in 60 seconds.</p>
+  <div class="url-form">
+    <input type="text" id="hero-url" placeholder="yourwebsite.com" autocomplete="off"/>
+    <button onclick="submitAudit('hero-url','hero-confirm')">Audit My Site →</button>
   </div>
-  <div class="hero-stats">
-    <div class="h-stat"><div class="num">367K</div><div class="lbl">Foreclosure filings in 2025 &mdash; up 14% YoY</div></div>
-    <div class="h-stat"><div class="num">$84T</div><div class="lbl">Boomer wealth transfer underway</div></div>
-    <div class="h-stat"><div class="num">60%+</div><div class="lbl">Of mortgages locked below 4%</div></div>
-    <div class="h-stat"><div class="num">18-22%</div><div class="lbl">Target IRR &mdash; 50-door model</div></div>
-    <div class="h-stat"><div class="num">1.9-2.4x</div><div class="lbl">Equity multiple at 5 years</div></div>
-  </div>
+  <div class="form-confirm" id="hero-confirm">✓ Got it — we'll send your full 10-point report within 24 hours</div>
 </section>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<!-- ── CHART SECTION ── -->
-<div id="chart-section">
-  <div class="chart-header">
-    <div class="section-tag">Interactive Market Analysis</div>
-    <div class="section-title" style="font-size:clamp(18px,2.5vw,28px)">55 Years of U.S. Real Estate: Wars, Events &amp; Optimal Scaling Windows</div>
-    <p style="font-size:12px;color:var(--text3);margin-bottom:0;padding-bottom:12px">Toggle any combination of layers. Hover markers for full context. Every prior wholesale window is documented below.</p>
-  </div>
-  <div class="controls">
-  <div class="ctrl-row">
-    <span class="ctrl-label">Layers:</span>
-    <button class="lbtn on" data-layer="war"    onclick="toggleLayer('war')">Wars &amp; Conflicts</button>
-    <button class="lbtn"    data-layer="econ"   onclick="toggleLayer('econ')">Economic Events</button>
-    <button class="lbtn"    data-layer="policy" onclick="toggleLayer('policy')">Policy Shocks</button>
-    <button class="lbtn"    data-layer="geo"    onclick="toggleLayer('geo')">Geopolitical</button>
-    <button class="lbtn"    data-layer="scale"  onclick="toggleLayer('scale')">Scale Windows</button>
-    <button class="lbtn"    data-layer="inst"   onclick="toggleLayer('inst')">Wealth Transfers</button>
-    <button class="lbtn"    data-layer="infl"   onclick="toggleLayer('infl')">Inflation (CPI)</button>
-    <button class="lbtn"    data-layer="debt"   onclick="toggleLayer('debt')">Debt / Affordability</button>
-    <button class="lbtn"    data-layer="boom"   onclick="toggleLayer('boom')">Boomer Timeline</button>
-    <button class="lbtn"    data-layer="med"    onclick="toggleLayer('med')">Median Prices</button>
-    <button class="lbtn"    data-layer="unemp"  onclick="toggleLayer('unemp')">Unemployment</button>
-    <div class="sep"></div>
-    <button class="all-btn"   onclick="allLayers()">All On</button>
-    <button class="clear-btn" onclick="clearLayers()">Clear</button>
-  </div>
-</div>
-  <div class="legend-bar">
-  <div class="leg"><div class="leg-line" style="background:#c8a46e"></div>Home Price Index</div>
-  <div class="leg"><div class="leg-circ" style="background:#e06060"></div>War/Conflict</div>
-  <div class="leg"><div class="leg-circ" style="background:#d45555"></div>Economic</div>
-  <div class="leg"><div class="leg-circ" style="background:#e8c44a"></div>Policy</div>
-  <div class="leg"><div class="leg-circ" style="background:#b478dc"></div>Geopolitical</div>
-  <div class="leg"><div class="leg-sq" style="background:rgba(80,184,128,.45);border:1px solid #50b880"></div>Best Scale</div>
-  <div class="leg"><div class="leg-sq" style="background:rgba(106,176,232,.3);border:1px solid #6ab0e8"></div>Good Scale</div>
-  <div class="leg"><div class="leg-sq" style="background:rgba(192,132,252,.35);border:1px solid #c084fc"></div>Wealth Transfer</div>
-  <div class="leg"><div class="leg-diam" style="background:#c084fc"></div>Inst. Entry</div>
-  <div class="leg"><div class="leg-line" style="background:#f87171"></div>CPI Inflation</div>
-  <div class="leg"><div class="leg-line" style="background:#38bdf8"></div>Debt Svc Ratio</div>
-  <div class="leg"><div class="leg-sq" style="background:rgba(251,146,60,.55);border:1px solid #fb923c"></div>Boomer Exits</div>
-  <div class="leg"><div class="leg-diam" style="background:#34d399"></div>Median Price</div>
-  <div class="leg"><div class="leg-line" style="background:#a78bfa"></div>Unemployment</div>
-  <div class="leg"><div class="leg-circ" style="background:#ffb432"></div>Current 2026</div>
-  </div>
-  <div class="chart-wrap"><canvas id="cv"></canvas></div>
-  <div class="scale-section">
-    <h3>Optimal Scaling Windows by Strategy &mdash; Historical Analysis</h3>
-    <div class="scale-grid" id="scale-grid"></div>
-  </div>
-  <div class="footer">
-    Sources: S&amp;P CoreLogic Case-Shiller Index &middot; Robert Shiller / Yale University &middot; BLS CPI &amp; Unemployment Historical Series &middot; Federal Reserve FRED &middot; FDIC Historical Reports &middot;
-    Freddie Mac 2024 Silver Tide &middot; Cerulli Associates &middot; NAR &middot; Census Bureau &middot; Goldman Sachs (AI displacement) &middot; McKinsey Global Institute &middot; JPMorgan 2026 Housing Outlook &middot;
-    ATTOM Year-End 2025 Foreclosure Report &middot; RealEstateNews.com (U.S.-Iran War March 2026)
-  </div>
-</div>
-
-<div class="tooltip" id="tt">
-  <div class="tt-ey" id="tt-ey"></div>
-  <div class="tt-ti" id="tt-ti"></div>
-  <div class="tt-bo" id="tt-bo"></div>
-  <div class="tt-tg" id="tt-tg"></div>
-</div>
-
-<hr class="divider"/>
-
-<!-- ── THESIS ── -->
-<section id="thesis">
-  <div class="section-tag">Why Now</div>
-  <div class="section-title">Five Converging Signals — Rarely Seen Together</div>
-  <p class="section-sub">Each of these conditions has independently produced outsized real estate returns in the historical data. All five are active simultaneously in 2026 for the first time since 2010-2012.</p>
-  <div class="thesis-grid">
-    <div class="t-card">
-      <div class="t-num">367K+</div>
-      <div class="t-label">Foreclosure filings rising 14% YoY</div>
-      <div class="t-body">Today&rsquo;s distressed sellers are different from 2008 — they carry an average $180K+ in home equity. Motivated by circumstance, not underwater. They accept 10-20% below retail for speed and certainty. That&rsquo;s exactly what we offer.</div>
+<!-- PROBLEM CARDS -->
+<section id="problems">
+  <div class="section-tag">Why It Matters</div>
+  <div class="section-title">Three ways your website is costing you right now</div>
+  <div class="problem-grid">
+    <div class="p-card">
+      <div class="p-icon">🔍</div>
+      <div class="p-title">Google Can't Find You</div>
+      <div class="p-body">Most business websites built before 2020 are invisible on Google. Without the right content and structure, you simply don't exist in search results — and neither does your revenue potential.</div>
     </div>
-    <div class="t-card green">
-      <div class="t-num" style="color:#50b880">$84T</div>
-      <div class="t-label">Boomer wealth transfer accelerating</div>
-      <div class="t-body">Freddie Mac projects 9.2M boomer households exiting homeownership by 2035. ~62% flow through estate and probate — a direct, 20-year structural feed to the wholesale pipeline. Not a one-time event.</div>
+    <div class="p-card">
+      <div class="p-icon">🤖</div>
+      <div class="p-title">AI Search Is Leaving You Behind</div>
+      <div class="p-body">ChatGPT, Claude, and Perplexity now answer buying questions directly. If your business isn't structured for AI search, you're invisible to a growing share of buyers who never open Google at all.</div>
     </div>
-    <div class="t-card amber">
-      <div class="t-num" style="color:#fb923c">60%+</div>
-      <div class="t-label">Mortgages locked below 4% — the freeze</div>
-      <div class="t-body">The lock-in effect freezes the general market but isolates motivated sellers from the noise. Those who must sell — divorce, death, relocation, financial hardship — accept discounts because they need speed. $18.78T total household debt Q4 2025 amplifies this pressure even for those with low mortgage rates.</div>
-    </div>
-    <div class="t-card purple">
-      <div class="t-num" style="color:#a78bfa">300M</div>
-      <div class="t-label">Jobs exposed to AI displacement globally</div>
-      <div class="t-body">Goldman Sachs. McKinsey projects 12M U.S. workers changing occupations by 2030. White-collar displacement creates a new seller profile: equity-rich, income-disrupted, motivated. A supply driver with no prior parallel in the 55-year dataset.</div>
-    </div>
-    <div class="t-card red">
-      <div class="t-num" style="color:#f87171">6.1%</div>
-      <div class="t-label">Rate cycle has peaked — unlock coming</div>
-      <div class="t-body">The Fed&rsquo;s projected rate path to 4.5-5% by 2028-2029 will unlock 60M+ locked-in homeowners as potential buyers — the largest pent-up demand release in modern history. Operators who build the portfolio before the unlock capture the full recovery.</div>
+    <div class="p-card">
+      <div class="p-icon">📉</div>
+      <div class="p-title">Visitors Leave Without Contacting You</div>
+      <div class="p-body">The average website converts less than 2% of visitors. That means 98 out of every 100 people who find you — leave without ever reaching out. That's fixable, and it's costing you every single day.</div>
     </div>
   </div>
 </section>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<!-- ── STRATEGY ── -->
-<section id="strategy">
-  <div class="section-tag">The Model</div>
-  <div class="section-title">Dual Strategy — Wholesale Engine + Buy-and-Hold Portfolio</div>
-  <p class="section-sub">The wholesale operation is not separate from the portfolio — it is the sourcing engine. Every deal evaluated against hold criteria before hitting the disposition list. Deals that qualify get retained. Deals that don&rsquo;t generate fee income that funds the next acquisition cycle.</p>
-  <div class="strategy-grid">
-    <div class="s-card wholesale">
-      <span class="s-badge">Strategy A</span>
-      <div class="s-title">Wholesale Acquisition Engine</div>
-      <div class="s-sub">Deal flow, assignment fees &amp; portfolio sourcing — the operational core</div>
-      <ul class="s-list">
-        <li>Target motivated segments: pre-foreclosure, probate/estate, divorce, absentee, tax delinquency</li>
-        <li>Acquisition at 65-80% of ARV — targeting $30K-$50K+ assignment fee or equity spread</li>
-        <li>14-21 day contract to close; 30-45 days lead to assignment</li>
-        <li>Capital at risk: $20K-$80K earnest money (refunded at assignment)</li>
-        <li>Disposition: end-buyer list, institutional buyers (Pretium, Amherst, regional funds), own portfolio</li>
-        <li>Revenue: $15K-$60K per assignment; double-close spreads; JV splits</li>
-      </ul>
+<!-- AUDIT PREVIEW -->
+<section id="preview">
+  <div class="section-tag">The Audit</div>
+  <div class="section-title">Here's what we check — all 10 points</div>
+  <p class="section-sub">Every audit covers both traditional website health and AI search readiness. Most businesses fail 6 or more of these checks.</p>
+  <div class="preview-wrap">
+    <div class="preview-header">
+      <div class="dot"></div>
+      <div class="label">Sample Audit Report — yourwebsite.com</div>
     </div>
-    <div class="s-card hold">
-      <span class="s-badge">Strategy B</span>
-      <div class="s-title">Buy &amp; Hold Portfolio Build</div>
-      <div class="s-sub">Long-term asset accumulation — the wealth engine for capital partners</div>
-      <ul class="s-list">
-        <li>Retain wholesale-sourced deals meeting criteria: 1%+ rent-to-price; 8%+ cash-on-cash; path-of-growth</li>
-        <li>Tier 1: Columbus, Indianapolis, Kansas City, Cleveland, Cincinnati</li>
-        <li>Assumable mortgage strategy: FHA/VA at 2.5-3.5% vs 6.1% new = ~$900-$1,200/month advantage per door</li>
-        <li>Minimum 5-7 year hold through rate unlock cycle; exit/refi window 2029-2031</li>
-        <li>Target: 50-200 doors across 3-5 markets within 36 months</li>
-        <li>Value-add: light rehab on 40-60% of acquisitions to force equity before tenanting</li>
-      </ul>
-    </div>
-  </div>
-  <div class="flywheel" style="margin-top:16px;max-width:600px">
-    <div style="font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">The Flywheel</div>
-    <div class="flywheel-step">Lead generation &amp; marketing</div>
-    <div class="flywheel-arrow">↓</div>
-    <div class="flywheel-step">Motivated seller contract (65-80% ARV)</div>
-    <div class="flywheel-arrow">↓</div>
-    <div class="flywheel-decision">Portfolio criteria met? → Retain &nbsp;|&nbsp; No → Wholesale for fees</div>
-    <div class="flywheel-arrow">↓</div>
-    <div class="flywheel-step" style="color:var(--gold);font-weight:600">Fee income funds marketing → more leads → growing portfolio</div>
+    <div class="audit-row"><span class="audit-name">Clear Value Proposition</span><span class="badge warn">NEEDS WORK</span></div>
+    <div class="audit-row"><span class="audit-name">Trust Signals</span><span class="badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Lead Capture</span><span class="badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Buyer-Ready Descriptions</span><span class="badge warn">NEEDS WORK</span></div>
+    <div class="audit-row"><span class="audit-name">Mobile Readable</span><span class="badge pass">PASS</span></div>
+    <div class="audit-row"><span class="audit-name">SEO Basics</span><span class="badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">AI Discoverability</span><span class="badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Structured Content for AI</span><span class="badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Google Business Profile</span><span class="badge warn">NEEDS WORK</span></div>
+    <div class="audit-row"><span class="audit-name">Citation Footprint</span><span class="badge warn">NEEDS WORK</span></div>
+    <div class="preview-footer">Your real report includes findings, why it matters, and step-by-step fixes for each point.</div>
   </div>
 </section>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<!-- ── RETURNS CALCULATOR ── -->
-<section id="returns">
-  <div class="section-tag">Return Projections</div>
-  <div class="section-title">Model Your Investment</div>
-  <p class="section-sub">Based on conservative underwriting in current Midwest market conditions. No meaningful home price appreciation assumed — returns generated through cash flow, discount capture, and operational efficiency.</p>
-  <div class="calc-wrap">
-    <div class="calc-panel">
-      <div class="calc-title">Investment Parameters</div>
-      <div class="calc-row">
-        <label>Capital Commitment</label>
-        <input type="range" id="capital-input" min="250" max="10000" step="250" value="2000"/>
-        <div class="range-val">$<span id="capital-display">2,000</span>K</div>
-      </div>
-      <div class="calc-row">
-        <label>Structure</label>
-        <select id="structure-select">
-          <option value="portfolio">Portfolio Fund (18-22% IRR)</option>
-          <option value="deal">Deal-by-Deal JV (15-25% IRR)</option>
-          <option value="pref">Preferred Equity (9-13% fixed)</option>
-          <option value="rev">Revenue Share (10-20% on deployed)</option>
-        </select>
-      </div>
-      <div class="calc-row">
-        <label>Hold Period</label>
-        <select id="hold-select">
-          <option value="3">3 Years</option>
-          <option value="5" selected>5 Years</option>
-          <option value="7">7 Years</option>
-        </select>
-      </div>
-      <div class="calc-row">
-        <label>Scenario</label>
-        <select id="scenario-select">
-          <option value="base">Base Case</option>
-          <option value="bear">Bear Case (-20% ARV, 15% vacancy)</option>
-          <option value="bull">Bull Case (5% appreciation, rate unlock)</option>
-        </select>
-      </div>
+<!-- CASE STUDY -->
+<section id="case">
+  <div class="section-tag">Real Example</div>
+  <div class="case-title">720 Instruments — 11 years in business. Invisible online.</div>
+  <div class="case-sub">A real audit. A real business. Every issue is fixable without a developer.</div>
+  <div class="case-grid">
+    <div class="case-col before">
+      <div class="col-label">Before the Audit</div>
+      <div class="case-item"><span class="icon">✗</span><span>Generic headline with no value proposition</span></div>
+      <div class="case-item"><span class="icon">✗</span><span>No reviews, no trust signals visible</span></div>
+      <div class="case-item"><span class="icon">✗</span><span>No way for visitors to ask a question</span></div>
+      <div class="case-item"><span class="icon">✗</span><span>Zero blog content — invisible on Google</span></div>
+      <div class="case-item"><span class="icon">✗</span><span>Not showing up in AI search results</span></div>
     </div>
-    <div class="calc-panel">
-      <div class="calc-title">Projected Returns</div>
-      <div class="result-grid">
-        <div class="r-box"><div class="r-num" id="r-pref">$160K</div><div class="r-lbl">8% Pref Return / yr</div></div>
-        <div class="r-box green"><div class="r-num" id="r-irr">20%</div><div class="r-lbl">Target IRR</div></div>
-        <div class="r-box blue"><div class="r-num" id="r-multiple">2.1x</div><div class="r-lbl">Equity Multiple</div></div>
-        <div class="r-box purple"><div class="r-num" id="r-total">$2.2M</div><div class="r-lbl">Total Return (incl. principal)</div></div>
-      </div>
-      <div class="note-text" id="calc-note">Portfolio Fund · 5yr hold · Base case. 8% preferred return paid first, then 70/30 LP/GP split above hurdle. All projections conservative — no price appreciation assumed in base case.</div>
+    <div class="case-col after">
+      <div class="col-label">After the Audit</div>
+      <div class="case-item"><span class="icon">✓</span><span>Clear headline: Certified Used Equipment, Ships Worldwide</span></div>
+      <div class="case-item"><span class="icon">✓</span><span>Trust bar, founder statement, and review strategy</span></div>
+      <div class="case-item"><span class="icon">✓</span><span>Lead capture form generating qualified inquiries</span></div>
+      <div class="case-item"><span class="icon">✓</span><span>Weekly SEO content plan targeting high-intent searches</span></div>
+      <div class="case-item"><span class="icon">✓</span><span>FAQ and structured content built for AI discoverability</span></div>
     </div>
   </div>
 </section>
 
-<hr class="divider"/>
+<hr class="div"/>
 
-<!-- ── MARKETS ── -->
-<section id="markets">
-  <div class="section-tag">Target Markets</div>
-  <div class="section-title">2026-2029 Acquisition Focus</div>
-  <p class="section-sub">Market selection is the highest-leverage decision in buy-and-hold real estate. Selected for rent-to-price ratios supporting immediate cash flow, employment trends supporting long-term demand, and wholesale deal flow density.</p>
-  <div style="font-size:10px;font-weight:700;color:#50b880;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Tier 1 — Highest Conviction</div>
-  <div class="markets-grid" style="margin-bottom:20px">
-    ${[
-      {city:'Columbus',state:'OH',price:'$118K',rent:'$1,195',ratio:'1.01%',pop:'+2.1%/yr',why:'Intel fab, OSU demand'},
-      {city:'Indianapolis',state:'IN',price:'$112K',rent:'$1,100',ratio:'0.98%',pop:'+2.4%/yr',why:'Amazon/FedEx logistics'},
-      {city:'Kansas City',state:'MO',price:'$108K',rent:'$1,050',ratio:'0.97%',pop:'+1.8%/yr',why:'Diverse economy'},
-      {city:'Cleveland',state:'OH',price:'$85K',rent:'$900',ratio:'1.06%',pop:'Stable',why:'Highest distress volume'},
-      {city:'Cincinnati',state:'OH',price:'$105K',rent:'$1,020',ratio:'0.97%',pop:'+1.6%/yr',why:'P&G/Amazon jobs'},
-    ].map(m=>`<div class="m-card m-tier1">
-      <div class="tier-label tier1-lbl">Tier 1</div>
-      <div class="m-city">${m.city}</div><div class="m-state">${m.state} &mdash; ${m.why}</div>
-      <div class="m-row"><span class="mk">Avg buy</span><span class="mv">${m.price}</span></div>
-      <div class="m-row"><span class="mk">Avg rent</span><span class="mv">${m.rent}/mo</span></div>
-      <div class="m-row"><span class="mk">Rent/price</span><span class="mv good">${m.ratio}</span></div>
-      <div class="m-row"><span class="mk">Population</span><span class="mv">${m.pop}</span></div>
-    </div>`).join('')}
-  </div>
-  <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Tier 2 — Opportunistic Entry 2026-2028</div>
-  <div class="markets-grid">
-    ${[
-      {city:'Phoenix',state:'AZ',entry:'2026-2027',thesis:'Down 8-12% from peak'},
-      {city:'Tampa',state:'FL',entry:'2026 selective',thesis:'Insurance crisis = motivated sellers'},
-      {city:'Atlanta',state:'GA',entry:'2026-2028',thesis:'Population growth; Blackstone validated'},
-      {city:'Memphis',state:'TN',entry:'Immediately',thesis:'Highest cap rates nationally'},
-    ].map(m=>`<div class="m-card m-tier2">
-      <div class="tier-label tier2-lbl">Tier 2</div>
-      <div class="m-city">${m.city}</div><div class="m-state">${m.state}</div>
-      <div class="m-row"><span class="mk">Entry</span><span class="mv">${m.entry}</span></div>
-      <div class="m-row"><span class="mk">Thesis</span><span class="mv">${m.thesis}</span></div>
-    </div>`).join('')}
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- ── CAPITAL STRUCTURE ── -->
-<section id="capital">
-  <div class="section-tag">Partnership Structure</div>
-  <div class="section-title">Capital Stack &amp; Distribution Waterfall</div>
-  <p class="section-sub">Market-standard institutional structure consistent with Blackstone/Invitation Homes, AMH, and regional private equity operators. LP capital and preferred return protected first at every tier.</p>
-  <div class="waterfall">
-    <div class="wf-tier"><div class="wf-n">Tier 1</div><div class="wf-trigger">LP Capital Return</div><div class="wf-dist">100% LP</div></div>
-    <div class="wf-tier"><div class="wf-n">Tier 2</div><div class="wf-trigger">8% Preferred Return</div><div class="wf-dist">100% LP</div></div>
-    <div class="wf-tier"><div class="wf-n">Tier 3</div><div class="wf-trigger">GP Catch-Up ~20%</div><div class="wf-dist">80% GP / 20% LP</div></div>
-    <div class="wf-tier"><div class="wf-n">Tier 4</div><div class="wf-trigger">Profit Split</div><div class="wf-dist">70% LP / 30% GP</div></div>
-  </div>
-  <div class="structures-grid">
-    ${[
-      {name:'Deal-by-Deal JV',for:'Relationship building; single acquisitions',check:'$50K-$500K',hold:'6mo-7yr',ret:'15-25% IRR'},
-      {name:'Portfolio Fund',for:'Scale deployment; diversification',check:'$1M-$10M',hold:'5-7 years',ret:'18-28% IRR'},
-      {name:'Preferred Equity',for:'Capital preservation priority',check:'$500K+',hold:'2-5 years',ret:'9-13% fixed'},
-      {name:'Revenue Share',for:'Wholesale fee participation',check:'$250K-$2M',hold:'Rolling 12mo',ret:'10-20% deployed'},
-    ].map(s=>`<div class="st-card">
-      <div class="st-name">${s.name}</div>
-      <div class="st-for">${s.for}</div>
-      <div class="st-row"><span class="sk">Min. check</span><span class="sv gold">${s.check}</span></div>
-      <div class="st-row"><span class="sk">Hold period</span><span class="sv">${s.hold}</span></div>
-      <div class="st-row"><span class="sk">Target return</span><span class="sv gold">${s.ret}</span></div>
-    </div>`).join('')}
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- ── RISKS ── -->
-<section id="risk">
-  <div class="section-tag">Honest Risk Assessment</div>
-  <div class="section-title">Real Risks &amp; How We Mitigate Them</div>
-  <p class="section-sub">We&rsquo;d rather put the risks on the table upfront than have you find them later.</p>
-  <div style="overflow-x:auto">
-  <table class="risk-table">
-    <thead><tr><th style="width:22%">Risk</th><th style="width:13%">Probability</th><th>Mitigant</th></tr></thead>
-    <tbody>
-      <tr><td><strong style="color:#f0e8d8">Rate spike / Iran war escalation</strong></td><td><span class="risk-badge rb-lm">Low-Med</span></td><td>Conservative underwriting at 6.5% rates. Stress-tested at 20% higher vacancy. Midwest focus minimizes oil-price sensitivity.</td></tr>
-      <tr><td><strong style="color:#f0e8d8">Deeper recession</strong></td><td><span class="risk-badge rb-med">Medium</span></td><td>Midwest markets with diverse employer bases. 6-month operating reserves non-negotiable. Workforce housing focus is most recession-resilient segment.</td></tr>
-      <tr><td><strong style="color:#f0e8d8">Wholesale regulation tightening</strong></td><td><span class="risk-badge rb-med">Medium</span></td><td>Multi-state operations. Hybrid model flexibility (JV, wholetail, co-wholesale). Compliance-first approach to disclosures in all markets.</td></tr>
-      <tr><td><strong style="color:#f0e8d8">ARV softens further</strong></td><td><span class="risk-badge rb-low">Low</span></td><td>Independent BPO on every acquisition. Minimum 20% equity cushion at purchase. Conservative ARV on 90-day sale comps only.</td></tr>
-      <tr><td><strong style="color:#f0e8d8">Execution / scale risk</strong></td><td><span class="risk-badge rb-med">Medium</span></td><td>Staged growth — systems built before scale. Capital partners approve growth milestones. GP co-invests minimum 10% in every deal.</td></tr>
-    </tbody>
-  </table>
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<!-- ── PARTNER ── -->
-<section id="partner">
-  <div class="section-tag">Get Involved</div>
-  <div class="section-title">Partner With Tall Bridge Real Estate</div>
-  <p class="section-sub">Currently in early-stage conversations with capital partners interested in deploying $500K to $10M+ into this platform. Minimum first engagement $500K.</p>
-  <div class="partner-inner">
-    <div>
-      <p style="font-size:13px;font-weight:700;color:#f0e8d8;margin-bottom:16px">What to expect from us</p>
-      <div class="p-what">
-        ${[
-          ['Quarterly LP reporting','Property-level performance, occupancy, rent, expenses, and portfolio valuation every quarter.'],
-          ['Monthly deal pipeline review','Active acquisitions, deal flow volume, and market conditions — you always know where capital is deployed.'],
-          ['Full transparency on every deal','Independent BPO, rehab scope, and underwriting assumptions presented before every closing.'],
-          ['GP co-investment on every deal','Minimum 10% GP equity in every transaction. Aligned incentives, every time.'],
-          ['Conservative underwriting standard','Every projection stress-tested at 20% higher vacancy and 10% lower ARV before presented to partners.'],
-          ['Flexible entry points','Start with a single deal JV to establish the relationship, scale to portfolio partnership as trust builds.'],
-        ].map(([t,b])=>`<div class="p-item"><div class="p-dot"></div><div class="p-item-text"><strong>${t}:</strong> ${b}</div></div>`).join('')}
-      </div>
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-tag">How It Works</div>
+  <div class="section-title">Three steps. Zero cost.</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Enter your website address</div>
+      <div class="step-body">Just your URL. No login, no credit card, no commitment required.</div>
     </div>
-    <div class="form-wrap" id="form-wrap">
-      <div class="form-title">Express Interest</div>
-      <div class="f-row"><label>Full Name</label><input type="text" id="f-name" placeholder="Your name"/></div>
-      <div class="f-row"><label>Email</label><input type="email" id="f-email" placeholder="your@email.com"/></div>
-      <div class="f-row"><label>Capital Range</label>
-        <select id="f-capital">
-          <option value="">Select range</option>
-          <option>$500K - $1M</option>
-          <option>$1M - $2.5M</option>
-          <option>$2.5M - $5M</option>
-          <option>$5M - $10M</option>
-          <option>$10M+</option>
-        </select>
-      </div>
-      <div class="f-row"><label>Preferred Structure</label>
-        <select id="f-structure">
-          <option value="">Not sure yet</option>
-          <option>Deal-by-Deal JV</option>
-          <option>Portfolio Fund</option>
-          <option>Preferred Equity</option>
-          <option>Revenue Share</option>
-          <option>Open to discussion</option>
-        </select>
-      </div>
-      <div class="f-row"><label>Message (optional)</label><textarea id="f-msg" placeholder="Any questions or context..."></textarea></div>
-      <button class="f-submit" onclick="submitForm()">Submit Expression of Interest</button>
-      <p class="f-note">Confidential. This is an expression of interest only — not a binding commitment. We will follow up within 2 business days.</p>
-      <div class="f-success" id="f-success">
-        <div class="check">✓</div>
-        <p style="color:#50b880;font-weight:700;margin-bottom:6px">Thank you — we&rsquo;ll be in touch.</p>
-        <p>Expect a response from Steven Enns at Tall Bridge Real Estate within 2 business days.</p>
-      </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">We audit all 10 points</div>
+      <div class="step-body">We review your site against every item — traditional SEO and AI search readiness.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Get your report with step-by-step fixes</div>
+      <div class="step-body">You get a full written report with specific, actionable fixes you can implement yourself.</div>
     </div>
   </div>
 </section>
 
-<!-- ── SITE FOOTER ── -->
-<footer class="site-footer">
-  <span class="brand">Tall Bridge Real Estate</span>
-  <span class="disc">Confidential — prepared for prospective capital partner review, March 2026. Not for distribution. All return projections are illustrative estimates based on conservative underwriting assumptions. Past cycle performance does not guarantee future results. This document does not constitute an offer to sell or solicitation of an offer to buy any security.</span>
-</footer>
+<hr class="div"/>
+
+<!-- BOTTOM CTA -->
+<section id="cta-bottom">
+  <h2>Stop guessing. Start knowing.</h2>
+  <p>Find out exactly what's holding your website back — free, within 24 hours.</p>
+  <div class="url-form" style="max-width:540px;margin:0 auto">
+    <input type="text" id="bottom-url" placeholder="yourwebsite.com" autocomplete="off"/>
+    <button onclick="submitAudit('bottom-url','bottom-confirm')">Audit My Site →</button>
+  </div>
+  <div class="form-confirm" id="bottom-confirm">✓ Got it — we'll send your full 10-point report within 24 hours</div>
+</section>
+
+<!-- FOOTER -->
+<footer>© 2026 Digital Growth OS</footer>
 
 <script>
-/* ── CALCULATOR LOGIC ──────────────────────────────────────────────────────── */
-const irrTable = {
-  portfolio:{base:{3:18,5:20,7:22},bear:{3:9,5:11,7:13},bull:{3:24,5:28,7:32}},
-  deal:     {base:{3:18,5:22,7:25},bear:{3:8,5:12,7:15},bull:{3:22,5:26,7:30}},
-  pref:     {base:{3:10,5:11,7:12},bear:{3:9,5:10,7:11},bull:{3:11,5:13,7:13}},
-  rev:      {base:{3:14,5:16,7:18},bear:{3:8,5:10,7:12},bull:{3:18,5:21,7:24}},
-};
-const multTable = {
-  portfolio:{base:{3:1.6,5:2.1,7:2.8},bear:{3:1.3,5:1.5,7:1.8},bull:{3:1.9,5:2.7,7:3.8}},
-  deal:     {base:{3:1.6,5:2.2,7:2.9},bear:{3:1.2,5:1.5,7:1.9},bull:{3:1.8,5:2.6,7:3.7}},
-  pref:     {base:{3:1.3,5:1.55,7:1.8},bear:{3:1.27,5:1.5,7:1.77},bull:{3:1.33,5:1.65,7:1.84}},
-  rev:      {base:{3:1.42,5:1.8,7:2.3},bear:{3:1.24,5:1.5,7:1.84},bull:{3:1.54,5:2.05,7:2.68}},
-};
-function fmtK(v){return v>=1000?'$'+(v/1000).toFixed(1)+'M':'$'+Math.round(v)+'K';}
-function updateCalc(){
-  const cap    = parseInt(document.getElementById('capital-input').value);
-  const struct = document.getElementById('structure-select').value;
-  const hold   = parseInt(document.getElementById('hold-select').value);
-  const scen   = document.getElementById('scenario-select').value;
-  document.getElementById('capital-display').textContent = cap.toLocaleString();
-  const irr  = irrTable[struct][scen][hold];
-  const mult = multTable[struct][scen][hold];
-  const pref = struct==='pref' ? cap*irr/100 : cap*0.08;
-  const tot  = cap*mult;
-  const profit = tot-cap;
-  document.getElementById('r-pref').textContent    = fmtK(Math.round(pref));
-  document.getElementById('r-irr').textContent     = irr+'%';
-  document.getElementById('r-multiple').textContent= mult.toFixed(1)+'x';
-  document.getElementById('r-total').textContent   = fmtK(Math.round(tot));
-  const names = {portfolio:'Portfolio Fund',deal:'Deal-by-Deal JV',pref:'Preferred Equity',rev:'Revenue Share'};
-  const scenNames = {base:'Base case',bear:'Bear case',bull:'Bull case'};
-  document.getElementById('calc-note').textContent =
-    names[struct]+' · '+hold+'yr hold · '+scenNames[scen]+'. '+
-    (struct==='pref'?'Fixed preferred return, capital preservation priority. Paid before any GP promote.':
-    '8% preferred return paid first, then 70/30 LP/GP split above hurdle. ')+
-    'Conservative underwriting — no price appreciation in base case. Stress-tested at +20% vacancy and -10% ARV.';
+function submitAudit(inputId, confirmId) {
+  const input = document.getElementById(inputId);
+  const val = input.value.trim();
+  if (!val) { input.focus(); return; }
+  input.disabled = true;
+  input.closest('.url-form').querySelector('button').disabled = true;
+  document.getElementById(confirmId).classList.add('show');
 }
-['capital-input','structure-select','hold-select','scenario-select'].forEach(id=>
-  document.getElementById(id).addEventListener('input', updateCalc));
-updateCalc();
-
-/* ── FORM LOGIC ────────────────────────────────────────────────────────────── */
-function submitForm(){
-  const name=document.getElementById('f-name').value.trim();
-  const email=document.getElementById('f-email').value.trim();
-  if(!name||!email){alert('Please enter your name and email.');return;}
-  document.getElementById('form-wrap').querySelector('form') // graceful
-  document.getElementById('f-success').style.display='block';
-  ['f-name','f-email','f-capital','f-structure','f-msg'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.style.display='none';
-  });
-  document.querySelector('.form-title').style.display='none';
-  document.querySelector('.f-submit').style.display='none';
-  document.querySelector('.f-note').style.display='none';
-  document.querySelectorAll('.f-row').forEach(r=>r.style.display='none');
-}
-
-/* ── SMOOTH NAV HIGHLIGHT ─────────────────────────────────────────────────── */
-window.addEventListener('scroll',()=>{
-  const sections=['hero','chart-section','thesis','strategy','returns','markets','capital','risk','partner'];
-  const links=document.querySelectorAll('.nav-links a');
-  let cur='';
-  sections.forEach(id=>{
-    const el=document.getElementById(id);
-    if(el&&window.scrollY>=el.offsetTop-80) cur=id;
-  });
-  links.forEach(a=>{
-    a.style.color=a.getAttribute('href')==='#'+cur?'var(--gold)':'';
+document.querySelectorAll('.url-form input').forEach(input => {
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const btn = this.closest('.url-form').querySelector('button');
+      btn.click();
+    }
   });
 });
-
-/* ── CHART ENGINE (embedded from chart_v2) ─────────────────────────────────── */
-
-// ─── ACTIVE LAYERS (multi-select set) ────────────────────────────────────────
-const activeLayers = new Set(['war']);
-
-function toggleLayer(l) {
-  activeLayers.has(l) ? activeLayers.delete(l) : activeLayers.add(l);
-  document.querySelectorAll('.lbtn').forEach(b => {
-    b.classList.toggle('on', activeLayers.has(b.dataset.layer));
-  });
-  draw();
-}
-function allLayers() {
-  ['war','econ','policy','geo','scale','inst','infl','debt','boom','med','unemp'].forEach(l => activeLayers.add(l));
-  document.querySelectorAll('.lbtn').forEach(b => b.classList.add('on'));
-  draw();
-}
-function clearLayers() {
-  activeLayers.clear();
-  document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('on'));
-  draw();
-}
-const has = l => activeLayers.has(l);
-
-// ─── DATA ─────────────────────────────────────────────────────────────────────
-const historical = [
-  {y:1970,v:93},{y:1971,v:96},{y:1972,v:101},{y:1973,v:103},
-  {y:1974,v:101},{y:1975,v:98},{y:1976,v:102},{y:1977,v:110},
-  {y:1978,v:118},{y:1979,v:121},{y:1980,v:115},{y:1981,v:107},
-  {y:1982,v:101},{y:1983,v:104},{y:1984,v:107},{y:1985,v:111},
-  {y:1986,v:118},{y:1987,v:124},{y:1988,v:126},{y:1989,v:127},
-  {y:1990,v:121},{y:1991,v:115},{y:1992,v:111},{y:1993,v:109},
-  {y:1994,v:109},{y:1995,v:108},{y:1996,v:110},{y:1997,v:115},
-  {y:1998,v:120},{y:1999,v:128},{y:2000,v:136},{y:2001,v:143},
-  {y:2002,v:153},{y:2003,v:165},{y:2004,v:180},{y:2005,v:194},
-  {y:2006,v:198},{y:2007,v:183},{y:2008,v:158},{y:2009,v:131},
-  {y:2010,v:122},{y:2011,v:116},{y:2012,v:114},{y:2013,v:123},
-  {y:2014,v:128},{y:2015,v:133},{y:2016,v:138},{y:2017,v:146},
-  {y:2018,v:153},{y:2019,v:158},{y:2020,v:170},{y:2021,v:204},
-  {y:2022,v:231},{y:2023,v:215},{y:2024,v:222},{y:2025,v:220},
-  {y:2026,v:218},{y:2027,v:212,p:1},{y:2028,v:205,p:1},{y:2029,v:207,p:1},{y:2030,v:213,p:1},
-];
-
-const events = [
-  {y:1973,layer:'war',col:'#e06060',tag:'war',above:true,
-   title:'Vietnam End + Yom Kippur War',ey:'1973 — War & Oil Shock',
-   body:'Arab nations embargo U.S. oil in retaliation for supporting Israel. Oil prices quadruple overnight. Inflation explodes to 12%. The war-oil-rates chain devastates housing affordability.',
-   tag_txt:'War → Oil Shock → Housing Collapse'},
-  {y:1979,layer:'war',col:'#e06060',tag:'war',above:false,
-   title:'Soviet Afghanistan + Iran Revolution',ey:'1979 — Cold War Escalation',
-   body:'Second oil shock. Persian Gulf supply disrupted. Inflation hits 13%+. The Fed\'s Volcker response drives rates to 20%. Mortgage rates reach 18% — the single most devastating rate event in modern U.S. housing history.',
-   tag_txt:'Cold War → 18% Mortgage Rates'},
-  {y:1990,layer:'war',col:'#e06060',tag:'war',above:true,
-   title:'Gulf War — Iraq Invades Kuwait',ey:'1990 — Gulf War',
-   body:'Oil prices spike 70%. U.S. leads Operation Desert Storm. Combined with the S&L banking crisis, this drives a 4-year housing correction. Military towns near bases see demand spikes.',
-   tag_txt:'Gulf War → Housing Correction'},
-  {y:2001,layer:'war',col:'#e06060',tag:'war',above:false,
-   title:'9/11 — War on Terror Begins',ey:'2001 — 9/11 & War on Terror',
-   body:'Catastrophic shock — yet housing STRENGTHENED. The Fed cuts rates to 1%. Investors flee equities for real estate. Post-9/11 rate cuts inadvertently fuel the subprime bubble. Key lesson: housing follows rates, not headlines.',
-   tag_txt:'War on Terror → Housing BOOMED (counterintuitive)'},
-  {y:2003,layer:'war',col:'#e06060',tag:'war',above:true,
-   title:'Iraq War — Operation Iraqi Freedom',ey:'2003 — Iraq War',
-   body:'U.S. invades Iraq. Fed keeps rates at 1% to support the wartime economy. The housing bubble inflates further. Confirms that rate policy overrides geopolitical fear in housing markets.',
-   tag_txt:'Iraq War → Bubble Fuel'},
-  {y:2022,layer:'war',col:'#e06060',tag:'war',above:false,
-   title:'Russia Invades Ukraine',ey:'2022 — Russia-Ukraine War',
-   body:'Energy prices surge 40%+. U.S. construction costs soar. Inflation hits 9.1% CPI. The Fed responds with its fastest rate-hike cycle since 1980.',
-   tag_txt:'War → Inflation → Fed Rate Shock'},
-  {y:2026,layer:'war',col:'#ffb432',tag:'current',above:true,
-   title:'U.S.-Iran War — March 2026 (LIVE)',ey:'2026 — CURRENT EVENT',
-   body:'Active military conflict began March 2026. Strait of Hormuz threatened, disrupting 20% of global oil supply. Mortgage rates jumped from 5.99% to 6.13% within days. Spring buying season now uncertain.',
-   tag_txt:'LIVE — U.S.-Iran War'},
-  {y:1974,layer:'econ',col:'#d45555',tag:'econ',above:false,
-   title:'Stagflation — Inflation + Recession',ey:'1974 — Stagflation',
-   body:'The worst of both worlds: 12% inflation AND recession simultaneously. Real home values erode even as nominal prices rise. Housing affordability collapses for a generation of first-time buyers.',
-   tag_txt:'Stagflation Shock'},
-  {y:1987,layer:'econ',col:'#d45555',tag:'econ',above:true,
-   title:'Black Monday — Market Crashes 22%',ey:'1987 — Black Monday',
-   body:'The largest single-day stock crash in history (-22.6%). Surprisingly, housing is unaffected short-term — investors pivot TO real estate as a safe haven. The S&L crisis is quietly building.',
-   tag_txt:'Market Crash → Housing Safe Haven'},
-  {y:2000,layer:'econ',col:'#d45555',tag:'econ',above:false,
-   title:'Dot-Com Bubble Bursts',ey:'2000 — Tech Crash',
-   body:'NASDAQ loses 78% from peak to trough. The Fed cuts rates to 1%. Capital flooding out of stocks pours into real estate — beginning the greatest peacetime housing boom ever recorded.',
-   tag_txt:'Tech Crash → Housing Mega-Boom'},
-  {y:2008,layer:'econ',col:'#d45555',tag:'econ',above:false,
-   title:'Global Financial Crisis — Lehman Collapses',ey:'2008 — GFC / Subprime Meltdown',
-   body:'Lehman Brothers files for bankruptcy. $700B in MBS implode. Home prices fall 42% in real terms. 3.8 million foreclosures in 2010 alone. Worst housing crash since 1929.',
-   tag_txt:'GFC — Worst Crash Since Great Depression'},
-  {y:2020,layer:'econ',col:'#d45555',tag:'econ',above:true,
-   title:'COVID-19 Pandemic',ey:'2020 — COVID-19',
-   body:'Fed cuts to zero. $5T+ stimulus injected. Remote work triggers mass migration to suburbs and Sun Belt. Mortgage rates hit a historic low of 2.65%. Prices up 40%+ in 2 years.',
-   tag_txt:'Pandemic → Historic Price Surge'},
-  {y:1982,layer:'policy',col:'#e8c44a',tag:'policy',above:true,
-   title:'S&L Deregulation — Garn-St. Germain Act',ey:'1982 — S&L Deregulation',
-   body:'Reagan deregulates Savings & Loans. S&Ls can now make risky real estate loans with depositor funds. Initially fuels a credit boom — but plants seeds of the S&L Crisis costing $160 billion.',
-   tag_txt:'Deregulation → Boom then Bust'},
-  {y:1997,layer:'policy',col:'#e8c44a',tag:'policy',above:false,
-   title:'Taxpayer Relief Act — $500K Exemption',ey:'1997 — Tax Policy Shift',
-   body:'Clinton signs a $500,000 capital gains exemption on home sales. This single policy creates a massive financial incentive to own real estate — a key driver of the 1997-2006 bull run.',
-   tag_txt:'Tax Policy → Sustained Demand Surge'},
-  {y:2010,layer:'policy',col:'#e8c44a',tag:'policy',above:true,
-   title:'Dodd-Frank Act — Post-Crisis Regulation',ey:'2010 — Financial Reform',
-   body:'Most sweeping financial regulation since the 1930s. QM rules eliminate no-doc loans. Restricts credit and slows the housing recovery 2-3 extra years — suppressing demand just when distressed inventory peaked.',
-   tag_txt:'Regulation → Slower Recovery'},
-  {y:2022.5,layer:'policy',col:'#e8c44a',tag:'policy',above:false,
-   title:'Fed Hikes Rates 5.25% in 18 Months',ey:'2022-2023 — Fed Rate Shock',
-   body:'Fed raises rates from 0.25% to 5.50% — most aggressive tightening since Volcker. Mortgage rates surge from 3% to 8%. Volume collapses 40%. The lock-in effect freezes homeowners.',
-   tag_txt:'Rate Shock → Market Freeze → Wholesale Opportunity'},
-  {y:1971,layer:'geo',col:'#b478dc',tag:'geo',above:true,
-   title:'Nixon Ends Gold Standard',ey:'1971 — Bretton Woods Ends',
-   body:'Nixon suspends gold convertibility. The Fed can now print money freely. This sets up the 1970s inflation spiral and makes real estate a critical inflation hedge. The hard asset premium in housing begins here.',
-   tag_txt:'Macro Shift → Real Estate as Inflation Hedge'},
-  {y:1995,layer:'geo',col:'#b478dc',tag:'geo',above:false,
-   title:'NAFTA + Internet Revolution',ey:'1995 — Globalization Era',
-   body:'NAFTA and the commercial internet launch simultaneously. The 1990s expansion becomes the longest peacetime boom in U.S. history. Knowledge-economy cities see structural housing demand surge.',
-   tag_txt:'Globalization & Tech → Knowledge-City Boom'},
-  {y:2012,layer:'geo',col:'#b478dc',tag:'geo',above:true,
-   title:'Institutional Investors Enter SFR',ey:'2012 — Private Equity Enters SFR',
-   body:'Blackstone, Invitation Homes, and others begin buying distressed SFR by the tens of thousands. First time large-scale PE competes directly with individual investors at the exact GFC bottom.',
-   tag_txt:'Institutional SFR Permanently Changes Market'},
-];
-
-const scaleWindows = [
-  {x1:1975,x2:1978,q:'best',col:'#50b880',label:'★ Post-Stagflation'},
-  {x1:1982,x2:1986,q:'best',col:'#50b880',label:'★ Post-Volcker'},
-  {x1:1992,x2:1997,q:'best',col:'#50b880',label:'★ Post-S&L / RTC'},
-  {x1:2009,x2:2013,q:'best',col:'#50b880',label:'★ Post-GFC Bottom'},
-  {x1:2026,x2:2030,q:'best',col:'#ffb432',label:'★ NOW'},
-  {x1:1988,x2:1991,q:'good',col:'#6ab0e8',label:'✓ Late Boom'},
-  {x1:1999,x2:2002,q:'good',col:'#6ab0e8',label:'✓ Dot-Com Crash'},
-  {x1:2013,x2:2017,q:'good',col:'#6ab0e8',label:'✓ Mid-Recovery'},
-];
-
-const wealthWaves = [
-  {x1:1975,x2:1982,label:'Wave 1 — Stagflation Transfer',col:'#c084fc',
-   body:'Middle-class homeowners forced out by 18% mortgage rates. Cash buyers absorb at 20-35% discounts. First systematic wholesale era.',
-   who:'Local cash buyers · Early syndicates',ey:'1975-1982'},
-  {x1:1989,x2:1995,label:'Wave 2 — S&L / RTC Liquidation',col:'#c084fc',
-   body:'1,000+ S&L failures. The RTC sells $400B+ in REO at 50-70 cents on the dollar. CMBS markets born. Early PE (PGIM, Starwood) builds portfolios.',
-   who:'Private equity · PGIM · Starwood · RTC buyers',ey:'1989-1995'},
-  {x1:2001,x2:2003,label:'Wave 3 — Dot-Com Rotation',col:'#c084fc',
-   body:'$7T in NASDAQ wealth evaporates. Tech homeowners in SF, Seattle, Austin face distress. Capital rotates from equities to hard assets.',
-   who:'Regional operators · Cash investors',ey:'2001-2003'},
-  {x1:2008,x2:2013,label:'Wave 4 — GFC Great Transfer',col:'#9333ea',
-   body:'Largest single wealth transfer in U.S. residential history. 10M+ foreclosures. Prices down 42% real. $3.5T in home equity recapitalized on institutional balance sheets.',
-   who:'Blackstone · AMH · Colony · Cerberus · Local operators',ey:'2008-2013'},
-  {x1:2020,x2:2022,label:'Wave 5 — COVID Liquidity Shock',col:'#c084fc',
-   body:'$7T in paper equity gained by existing owners. Renters permanently priced out. Institutional buyers accelerate. iBuyers peak.',
-   who:'Invitation Homes · AMH · iBuyers · Foreign SWFs',ey:'2020-2022'},
-  {x1:2026,x2:2030,label:'Wave 6 — Boomer Transfer (CURRENT)',col:'#ffb432',
-   body:'$84T generational transfer underway. Lock-in effect isolates motivated sellers. Iran war uncertainty. Foreclosure filings up 14% YoY. Best buying window since 2012.',
-   who:'Local operators with capital · Regional funds',ey:'2026-2030 (ACTIVE)'},
-];
-
-const instEvents = [
-  {y:1989.5,above:false,col:'#c084fc',
-   title:'RTC Begins Mass REO Liquidation',ey:'1989 — Resolution Trust Corp',
-   body:'The RTC is created to liquidate $400B+ in failed S&L assets. Properties sold at 40-60 cents on the dollar. First government-orchestrated mass RE liquidation in U.S. history.',
-   tag_txt:'Government Liquidation → First Institutional RE Fortunes'},
-  {y:2012,above:true,col:'#9333ea',
-   title:'Blackstone / Invitation Homes Enters SFR',ey:'2012 — Institutional Flood',
-   body:'Blackstone launches Invitation Homes and begins buying 1,000+ homes per week. At peak speed they spend ~$150M per week. AMH, Colony, and Cerberus enter simultaneously.',
-   tag_txt:'Blackstone · AMH · Colony — $15B+ deployed in 18 months'},
-  {y:2013.5,above:false,col:'#9333ea',
-   title:'Institutional Buying Wave Peaks',ey:'2013 — Peak Market Share',
-   body:'Institutional investors reach ~11-13% of total SFR purchases nationally. Margins thin as prices recover. Most institutions pull back and shift to managing existing portfolios.',
-   tag_txt:'Peak: ~13% market share · Retail operators priced out'},
-  {y:2017,above:true,col:'#9333ea',
-   title:'Invitation Homes IPO — SFR REIT Born',ey:'2017 — Invitation Homes IPO',
-   body:'Blackstone takes Invitation Homes public at $1.54B equity offering. First large-scale SFR REIT IPO in history. Blackstone\'s return: estimated 5-8x on invested capital.',
-   tag_txt:'INVH IPO · 5-8x Blackstone return · SFR REIT sector created'},
-  {y:2021,above:false,col:'#c084fc',
-   title:'iBuyers Peak — Zillow Exits with $500M Loss',ey:'2021 — iBuyer Wave & Crash',
-   body:'iBuyers collectively purchase ~70,000 homes/quarter nationally. In November 2021, Zillow shuts down Zillow Offers after losing $500M+ on mispriced acquisitions.',
-   tag_txt:'iBuyer Peak → Zillow $500M loss → Model questioned'},
-  {y:2024,above:true,col:'#c084fc',
-   title:'Pretium / Amherst Reactivate Acquisition Teams',ey:'2024-2026 — Wave 4 Forming',
-   body:'Pretium Partners and Amherst Holdings begin rebuilding acquisition pipelines. Boomer estate supply accelerating. Institutions positioning infrastructure — Wave 4 building.',
-   tag_txt:'Wave 4 forming · Pretium + Amherst reactivating'},
-];
-
-const inflationData = [
-  {y:1970,v:5.7},{y:1971,v:4.4},{y:1972,v:3.2},{y:1973,v:6.2},{y:1974,v:11.1},
-  {y:1975,v:9.1},{y:1976,v:5.8},{y:1977,v:6.5},{y:1978,v:7.6},{y:1979,v:11.3},
-  {y:1980,v:13.5},{y:1981,v:10.3},{y:1982,v:6.2},{y:1983,v:3.2},{y:1984,v:4.3},
-  {y:1985,v:3.6},{y:1986,v:1.9},{y:1987,v:3.6},{y:1988,v:4.1},{y:1989,v:4.8},
-  {y:1990,v:5.4},{y:1991,v:4.2},{y:1992,v:3.0},{y:1993,v:3.0},{y:1994,v:2.6},
-  {y:1995,v:2.8},{y:1996,v:3.0},{y:1997,v:2.3},{y:1998,v:1.6},{y:1999,v:2.2},
-  {y:2000,v:3.4},{y:2001,v:2.8},{y:2002,v:1.6},{y:2003,v:2.3},{y:2004,v:2.7},
-  {y:2005,v:3.4},{y:2006,v:3.2},{y:2007,v:2.9},{y:2008,v:3.8},{y:2009,v:-0.4},
-  {y:2010,v:1.6},{y:2011,v:3.2},{y:2012,v:2.1},{y:2013,v:1.5},{y:2014,v:1.6},
-  {y:2015,v:0.1},{y:2016,v:1.3},{y:2017,v:2.1},{y:2018,v:2.4},{y:2019,v:1.8},
-  {y:2020,v:1.2},{y:2021,v:4.7},{y:2022,v:8.0},{y:2023,v:4.1},{y:2024,v:2.9},
-  {y:2025,v:2.6},{y:2026,v:2.4},
-];
-const inflationMarkers = [
-  {y:1974,v:11.1,lbl:'11.1%\nOil Embargo',above:true},
-  {y:1980,v:13.5,lbl:'13.5%\nVolcker Peak',above:true},
-  {y:1986,v:1.9, lbl:'1.9%\nVolcker Victory',above:false},
-  {y:1998,v:1.6, lbl:'1.6%\nGoldilocks',above:false},
-  {y:2009,v:-0.4,lbl:'-0.4%\nGFC Deflation',above:false},
-  {y:2022,v:8.0, lbl:'8.0%\nCOVID Peak',above:true},
-  {y:2026,v:2.4, lbl:'2.4%\nCurrent',above:false},
-];
-
-const debtServiceData = [
-  {y:1980,v:10.8},{y:1981,v:11.4},{y:1982,v:11.2},{y:1983,v:10.9},{y:1984,v:11.5},
-  {y:1985,v:11.8},{y:1986,v:12.0},{y:1987,v:12.3},{y:1988,v:12.5},{y:1989,v:12.8},
-  {y:1990,v:12.4},{y:1991,v:11.8},{y:1992,v:11.2},{y:1993,v:10.8},{y:1994,v:11.0},
-  {y:1995,v:11.2},{y:1996,v:11.4},{y:1997,v:11.5},{y:1998,v:11.7},{y:1999,v:12.0},
-  {y:2000,v:12.3},{y:2001,v:12.4},{y:2002,v:12.6},{y:2003,v:12.5},{y:2004,v:12.7},
-  {y:2005,v:13.1},{y:2006,v:13.4},{y:2007,v:13.8},{y:2008,v:14.1},{y:2009,v:13.5},
-  {y:2010,v:12.8},{y:2011,v:12.0},{y:2012,v:11.2},{y:2013,v:10.5},{y:2014,v:10.2},
-  {y:2015,v:10.0},{y:2016,v:10.1},{y:2017,v:10.2},{y:2018,v:10.4},{y:2019,v:10.5},
-  {y:2020,v:9.8},{y:2021,v:9.1},{y:2022,v:9.6},{y:2023,v:10.3},{y:2024,v:10.8},
-  {y:2025,v:11.25},{y:2026,v:11.4},
-];
-const debtMilestones = [
-  {y:1990,lbl:'1990\nAffordability\nCrisis',
-   body:'Mortgage rates 10%+. Median income ~$29K. Monthly payment on median home ($79K) = ~$700 = 29% gross income.',
-   stat:'Household debt ~$3.6T'},
-  {y:2008,lbl:'2008\nGFC Peak\n14.1% DSR',
-   body:'DSR hit 14.1% — unsustainable. Median home $222K but subprime borrowers paying interest-only or negative amortization.',
-   stat:'Household debt $13.8T — record at time'},
-  {y:2012,lbl:'2012\nAffordability\nFloor',
-   body:'Most affordable housing in a generation relative to income. Rates 3.5%. DSR at 35-year low. Historic opportunity for those with jobs and credit.',
-   stat:'Household debt $11.3T — had declined'},
-  {y:2024,lbl:'2024\nCurrent\nCrisis',
-   body:'Median home $420K+. Median income $80K. Monthly payment at 6.5% = $2,650 = 40% of gross income. Worst affordability since 1984. Harvard JCHS: first-time buyer share at all-time low.',
-   stat:'$18.78T total household debt Q4 2025 — record'},
-];
-
-const boomerBars = [
-  {y:2024,h:300, lbl:'300K', note:'Slow start — boomers holding, health drivers emerging',proj:false},
-  {y:2025,h:450, lbl:'450K', note:'Accelerating — estate + health + divorce drivers',proj:false},
-  {y:2026,h:550, lbl:'550K', note:'Lock-in effect easing; Iran war uncertainty adding motivation',proj:false},
-  {y:2027,h:600, lbl:'600K', note:'Freddie Mac forecast: 600K net exit. Rate unlock begins helping.',proj:true},
-  {y:2028,h:700, lbl:'700K', note:'Probate + downsizing accelerating; boomers avg age 74',proj:true},
-  {y:2029,h:820, lbl:'820K', note:'Rate unlock triggers voluntary sales from rate-locked boomers',proj:true},
-  {y:2030,h:900, lbl:'900K', note:'Boomers avg age 75+; health forces hand; estate sales surge',proj:true},
-  {y:2031,h:900, lbl:'900K', note:'Freddie Mac: 900K net exit. Cumulative ~5.5M since 2022.',proj:true},
-  {y:2032,h:980, lbl:'980K', note:'Accelerating mortality + assisted living downsizing',proj:true},
-  {y:2033,h:1050,lbl:'1.05M',note:'Peak estate transfer zone. Heir sales flood wholesale pipeline.',proj:true},
-  {y:2034,h:1120,lbl:'1.12M',note:'Sustained high-volume release. 32M boomer HHs in 2022 → ~25M',proj:true},
-  {y:2035,h:1200,lbl:'1.2M', note:'Freddie Mac: 1.2M net exit — cumulative ~9.2M since 2022.',proj:true},
-];
-
-const medianPrices = [
-  {y:1970,v:97, p:'$23K',  type:'trough', lbl:'1970\n$23K'},
-  {y:1980,v:115,p:'$62.9K',type:'peak',   lbl:'1980\n$62.9K'},
-  {y:1982,v:101,p:'$67.8K',type:'trough', lbl:'1982\n$67.8K'},
-  {y:1989,v:127,p:'$120K', type:'peak',   lbl:'1989\n$120K'},
-  {y:1993,v:109,p:'$106.8K',type:'trough',lbl:'1993\n$106.8K'},
-  {y:2006,v:198,p:'$222K', type:'peak',   lbl:'2006\n$222K'},
-  {y:2012,v:114,p:'$177K', type:'trough', lbl:'2012\n$177K'},
-  {y:2022,v:231,p:'$479.5K',type:'peak',  lbl:'2022\n$479.5K'},
-  {y:2026,v:218,p:'~$416K',type:'current',lbl:'2026\n~$416K'},
-];
-
-// ─── UNEMPLOYMENT DATA (BLS annual avg %) ────────────────────────────────────
-const unempData = [
-  {y:1970,v:4.9},{y:1971,v:5.9},{y:1972,v:5.6},{y:1973,v:4.9},
-  {y:1974,v:5.6},{y:1975,v:8.5},{y:1976,v:7.7},{y:1977,v:7.1},
-  {y:1978,v:6.1},{y:1979,v:5.8},{y:1980,v:7.2},{y:1981,v:7.6},
-  {y:1982,v:9.7},{y:1983,v:9.6},{y:1984,v:7.5},{y:1985,v:7.2},
-  {y:1986,v:7.0},{y:1987,v:6.2},{y:1988,v:5.5},{y:1989,v:5.3},
-  {y:1990,v:5.6},{y:1991,v:6.8},{y:1992,v:7.5},{y:1993,v:6.9},
-  {y:1994,v:6.1},{y:1995,v:5.6},{y:1996,v:5.4},{y:1997,v:4.9},
-  {y:1998,v:4.5},{y:1999,v:4.2},{y:2000,v:4.0},{y:2001,v:4.7},
-  {y:2002,v:5.8},{y:2003,v:6.0},{y:2004,v:5.5},{y:2005,v:5.1},
-  {y:2006,v:4.6},{y:2007,v:4.6},{y:2008,v:5.8},{y:2009,v:9.3},
-  {y:2010,v:9.6},{y:2011,v:8.9},{y:2012,v:8.1},{y:2013,v:7.4},
-  {y:2014,v:6.2},{y:2015,v:5.3},{y:2016,v:4.9},{y:2017,v:4.4},
-  {y:2018,v:3.9},{y:2019,v:3.7},{y:2020,v:8.1},{y:2021,v:5.4},
-  {y:2022,v:3.6},{y:2023,v:3.6},{y:2024,v:4.0},{y:2025,v:4.2},
-  {y:2026,v:4.1},
-];
-// Key peaks, valleys and notable moments
-const unempMarkers = [
-  {y:1973,v:4.9, lbl:'4.9%\nPre-Oil Low',   above:false, type:'low',
-   note:'Near full employment. Oil embargo shock about to devastate the economy.'},
-  {y:1975,v:8.5, lbl:'8.5%\nOil Shock Peak',above:true,  type:'peak',
-   note:'Stagflation recession. 2M+ jobs lost. Distressed sellers flood market — key input to the 1975-78 wholesale window.'},
-  {y:1979,v:5.8, lbl:'5.8%\nPre-Volcker',   above:false, type:'low',
-   note:'Unemployment briefly recovers before the Volcker rate shock triggers the deepest post-WWII recession.'},
-  {y:1982,v:9.7, lbl:'9.7%\nVolcker Peak',  above:true,  type:'peak',
-   note:'Highest unemployment since the Great Depression at that point. 11.4M unemployed. Mortgage rate at 18%. Created the distressed seller pool that made 1982-86 a legendary buying window.'},
-  {y:1989,v:5.3, lbl:'5.3%\nPre-S&L Low',  above:false, type:'low',
-   note:'Near full employment entering the S&L crisis. Job losses lagged the housing downturn by 12-18 months.'},
-  {y:1992,v:7.5, lbl:'7.5%\nS&L Peak',     above:true,  type:'peak',
-   note:'Post-S&L recession peak. Distressed sellers concentrated in TX, CA, NE. RTC inventory at maximum — best government-liquidation buying opportunity in U.S. history.'},
-  {y:2000,v:4.0, lbl:'4.0%\nDot-Com Low',  above:false, type:'low',
-   note:'54-year unemployment low at the time. Full employment entering the dot-com crash. Job losses hit tech-heavy metros hard — SF, Seattle, Boston — creating motivated sellers.'},
-  {y:2003,v:6.0, lbl:'6.0%\nDot-Com Peak', above:true,  type:'peak',
-   note:'Tech sector losses concentrated. Non-tech markets absorbed displaced workers. Retail SFR demand stayed firm outside tech metros.'},
-  {y:2007,v:4.6, lbl:'4.6%\nPre-GFC Low',  above:false, type:'low',
-   note:'Last pre-crisis reading. Within 24 months, unemployment would triple. Subprime defaults beginning to accelerate.'},
-  {y:2010,v:9.6, lbl:'9.6%\nGFC Peak',     above:true,  type:'peak',
-   note:'Crisis peak. 15M unemployed. Wholesale deal flow hit record levels — this unemployment peak directly corresponds to the greatest distressed acquisition window in modern history.'},
-  {y:2019,v:3.7, lbl:'3.7%\nPre-COVID Low',above:false, type:'low',
-   note:'50-year unemployment low. Economy at full employment entering COVID. Fed had minimal rate room to cut.'},
-  {y:2020,v:8.1, lbl:'8.1%↑(14.7% peak)\nCOVID',above:true, type:'peak',
-   note:'Annual avg 8.1% masks a catastrophic April 2020 spike to 14.7% — highest since 1940. Fed/government response was unprecedented. Unemployment fell almost as fast as it rose.'},
-  {y:2023,v:3.6, lbl:'3.6%\n54-yr Low',    above:false, type:'low',
-   note:'Joint 54-year low with 2022-2023. Labour market historically tight. Starting to soften as rate hikes filter through.'},
-  {y:2026,v:4.1, lbl:'4.1%\nCurrent',      above:true,  type:'current',
-   note:'Unemployment rising slowly — up from 3.4% low in 2023. Iran war uncertainty and AI displacement beginning to show in tech and white-collar sectors. Fed watching closely.'},
-];
-
-const scaleDetails = [
-  {period:'1975-1978',label:'Post-Stagflation Recovery',q:'best',col:'#50b880',
-   unemp:'8.5% → 6.1%',
-   body:'After the oil embargo recession clears, distressed sellers flood the market. Rates still high but beginning to fall. Cash buyers dominate. Motivated sellers accept deep discounts. Unemployment peaked at 8.5% in 1975 and was falling — which expanded the buyer pool quarter by quarter, creating an ideal absorption environment for acquired properties.',
-   strats:['Wholesale','Buy & Hold','Fix & Flip'],
-   why:'Distress + falling rates + falling unemployment = buyer pool expanding while seller motivation stays high'},
-  {period:'1982-1986',label:'Post-Volcker Recovery',q:'best',col:'#50b880',
-   unemp:'9.7% → 7.0%',
-   body:'Unemployment hit a post-WWII record of 9.7% in 1982, creating the deepest distressed seller pool in a generation. As Volcker\'s medicine worked and rates fell from 18% to 10%, unemployment steadily improved — expanding the buyer pool just as distressed inventory peaked. S&L deregulation flooded new credit in simultaneously. The falling unemployment trend was the exit mechanism that validated buy-and-hold acquisitions made at the bottom.',
-   strats:['Wholesale','Acquire Rentals','Fix & Flip','Wholetail'],
-   why:'Record unemployment = record distress, then falling unemployment = expanding buyer pool — the full cycle in 4 years'},
-  {period:'1992-1997',label:'Post-S&L / RTC Era',q:'best',col:'#50b880',
-   unemp:'7.5% → 4.9%',
-   body:'S&L crisis creates massive government-owned REO inventory. The RTC sells thousands of properties at steep discounts. Unemployment peaked at 7.5% in 1992, then fell steadily to 4.9% by 1997 — one of the longest uninterrupted employment recoveries on record. Rates stabilized at 7-8%. Every year of this window, the buyer pool grew while distressed inventory worked through the system. Operators who acquired at the 1992-93 distress peak held through a 5-year appreciation runway.',
-   strats:['All Strategies','RTC/FDIC Deals','Acquire Rentals','Wholetail'],
-   why:'Government distress supply + 5-year unemployment recovery = maximum appreciation runway on held assets'},
-  {period:'2009-2013',label:'Post-GFC Bottom',q:'best',col:'#50b880',
-   unemp:'9.6% → 7.4%',
-   body:'The greatest wholesale opportunity in modern history. Unemployment hit 9.6% in 2010 — 15 million Americans out of work — creating 3.8M+ foreclosure filings per year. Banks dumped REO at 40-60 cents. QE drove rates to 3.5%. The critical insight: unemployment peaked in 2010 and was in steady decline by the time Blackstone entered in 2012, meaning the buyer pool was already expanding when institutional buyers validated the thesis. Fix-and-flip margins hit 30-40%. The falling unemployment trend from 9.6% to 7.4% between 2010-2013 was the wind at every investor\'s back.',
-   strats:['Wholesale Volume','Acquire Rentals','Fix & Flip','Wholetail'],
-   why:'Unemployment peak = distress peak. The decline from 9.6% created the expanding buyer pool that drove 7 years of price recovery'},
-  {period:'2026-2030',label:'CURRENT WINDOW — RIGHT NOW',q:'best',col:'#ffb432',
-   unemp:'4.1% → Est. 5.5-7%',
-   body:'Unemployment sits at 4.1% today — low by historical standards, but rising. The critical difference from prior cycles: AI-driven white-collar displacement is adding a new, structural unemployment pressure not present in any previous window. Goldman Sachs estimates 300M jobs globally are exposed to AI automation. In the U.S., McKinsey projects 12M workers needing to change occupations by 2030. Legal, finance, admin, coding and customer service are the first-wave sectors. When white-collar workers lose income, they become motivated sellers — with equity, but with urgency. Combined with the lock-in effect, $84T boomer transfer, and Iran war distress, the motivated seller pipeline has more active supply streams than any prior cycle. Assumable FHA/VA mortgages at 2.5-3.5% vs 6.1% new = ~$1,000/month cash flow advantage per door — a structural edge that expires as loans mature.',
-   strats:['Wholesale','Assumable Mortgages','Pre-Foreclosure','Acquire Rentals'],
-   why:'Rising unemployment (new AI driver) + boomer transfer + lock-in effect + rate cycle bottoming = multi-stream distressed pipeline unlike any prior window'},
-  {period:'1988-1991',label:'Late Boom / Early Decline',q:'good',col:'#6ab0e8',
-   unemp:'5.5% → 6.8%',
-   body:'Unemployment was at a cycle low of 5.3% entering this window — late-cycle conditions. As the S&L crisis deepened, unemployment began rising toward 6.8% by 1991, which simultaneously created motivated sellers AND constrained the buyer pool. Quick wholesale flips and wholetail work well in this environment. Avoid over-leveraged long holds — a rising unemployment trend historically signals further price softness ahead.',
-   strats:['Wholesale','Quick Flips','Wholetail'],
-   why:'Rising unemployment = dual headwind (more sellers, fewer buyers) — speed of execution is the only edge'},
-  {period:'1999-2002',label:'Dot-Com Crash Transition',q:'good',col:'#6ab0e8',
-   unemp:'4.2% → 6.0%',
-   body:'Dot-com bust drove unemployment from a 30-year low of 4.0% in 2000 to 6.0% by 2003. Tech-sector losses were concentrated in specific metros: SF, Seattle, Austin, Boston. Outside those markets, unemployment impact was modest. Post-9/11 rate cuts to 1% fueled buyer demand. Fix-and-flip margins solid in non-tech markets. Key lesson: unemployment spikes that are sector-specific create targeted motivated seller pools in specific geographies — allowing surgical acquisition strategies.',
-   strats:['Wholesale','Fix & Flip','SFR Buy & Hold'],
-   why:'Sector-concentrated unemployment = motivated sellers in specific geographies — surgical strategy beats broad net'},
-  {period:'2013-2017',label:'Mid-Recovery Expansion',q:'good',col:'#6ab0e8',
-   unemp:'7.4% → 4.4%',
-   body:'Recovery underway, unemployment falling steadily from 7.4% to 4.4%. This declining unemployment trend was the primary driver of retail buyer re-entry — the best exit environment for fix-and-flip that decade. Rental yields still cash-flow positive in most markets as rental demand stayed firm (many former owners renting after foreclosure). Window closes as prices approach 2006 nominal highs and unemployment approaches full-employment territory.',
-   strats:['Fix & Flip','Wholetail','Acquire Rentals'],
-   why:'Falling unemployment = maximum retail buyer pool expansion = best flip exit environment of the decade'},
-];
-
-// ─── AI DISPLACEMENT & FORWARD-LOOKING DATA (for enhanced scale section) ────
-const aiDisplacementData = {
-  headline: 'AI Job Displacement: The New Distress Driver (2026-2032)',
-  summary: 'AI automation represents a structural, multi-year unemployment pressure that has no direct parallel in the 55-year dataset. Unlike cyclical recessions, AI displacement is sector-specific, permanent, and accelerating. The real estate implication is significant: displaced white-collar workers become motivated sellers with equity — a higher-quality distressed seller profile than subprime borrowers.',
-  timeline: [
-    {period:'2024-2026',phase:'Early Displacement',detail:'~500K-1M U.S. white-collar jobs disrupted. Legal, coding, admin, customer service. Visible in tech layoff data. Not yet showing in aggregate unemployment — disguised by overall job growth in other sectors.'},
-    {period:'2027-2029',phase:'Acceleration Phase',detail:'McKinsey projects 12M workers needing occupation change by 2030. Goldman Sachs: 300M global jobs exposed. U.S. professional services, financial analysis, and mid-level management see structural shrinkage. Unemployment projected to rise 1-3% above current 4.1% baseline.'},
-    {period:'2030-2035',phase:'Structural Reset',detail:'Labor market restructuring. New job categories emerge but retraining lags. Income disruption concentrated in $60K-$150K earners — exactly the demographic most likely to own homes with equity but face financial pressure. Estimated 2-4M additional motivated sellers in this income band by 2032.'},
-  ],
-  reImplication: 'White-collar displaced workers are different from subprime-era distressed sellers: they typically have 20-40% equity in their homes, stable prior payment history, and motivated by income disruption rather than debt overload. This creates cleaner transactions, less title complexity, and lower negotiation friction. The AI-driven motivated seller of 2027-2030 may be the highest-quality wholesale acquisition opportunity since the post-S&L RTC era.',
-  metros: 'Highest AI-displacement exposure metros: San Francisco, Seattle, Austin, New York, Boston, Washington DC. Secondary exposure: Chicago, Denver, Atlanta tech corridors. Lowest exposure: Midwest manufacturing/healthcare hubs — Columbus, Indianapolis, Kansas City, Cleveland — which is precisely why these are our target hold markets.',
-  sources: 'Goldman Sachs Global Investment Research 2023 · McKinsey Global Institute Future of Work 2023 · World Economic Forum Future of Jobs Report 2025 · BLS Occupational Outlook Handbook'
-};
-
-const assumableMortgageData = {
-  headline: 'Assumable Mortgage Edge: A Time-Limited Structural Advantage',
-  body: 'An estimated 11-13 million FHA and VA loans originated 2020-2022 carry rates of 2.5-3.5%. At today\'s 6.1% purchase rate, assuming one of these loans saves a buyer approximately $900-$1,400/month on a $350K-$450K home. This is not a small number — it is the difference between cash-flow positive and cash-flow negative on a rental, and it represents a $108K-$168K present value advantage over a 10-year hold. As a wholesale operator, properties with assumable mortgages command premium disposition pricing from end buyers who understand the math. This edge expires as these loans pay down and reach non-assumable thresholds — estimated 6-9 year window from 2024.',
-  cashflow: '$900-$1,400/month savings vs new financing at 6.1%',
-  window: '2024-2030 estimated — expires as 2020-22 loans mature',
-  strategy: 'Target FHA/VA pre-foreclosures specifically for assumable assumption. Underwrite disposition premium of 8-15% above non-assumable comparable.'
-};
-
-// ─── CANVAS DRAWING ENGINE ────────────────────────────────────────────────────
-const cv = document.getElementById('cv');
-const ctx = cv.getContext('2d');
-let W, H, M, iW, iH, DPR;
-const hitTargets = [];
-
-const YDOMAIN = [1970, 2030];
-const VDOMAIN = [75, 255];
-
-function xSc(y) { return M.l + (y - YDOMAIN[0]) / (YDOMAIN[1] - YDOMAIN[0]) * iW; }
-function ySc(v) { return M.t + (1 - (v - VDOMAIN[0]) / (VDOMAIN[1] - VDOMAIN[0])) * iH; }
-// Secondary scales
-function inflSc(v) { return M.t + (1 - (v + 2) / 17) * iH; }  // -2 to 15%
-function debtSc(v) { return M.t + (1 - (v - 8) / 8) * iH; }   // 8 to 16%
-function unempSc(v){ return M.t + (1 - v / 16) * iH; }         // 0 to 16%
-
-function hex2rgba(hex, a) {
-  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-  return `rgba(${r},${g},${b},${a})`;
-}
-
-function catmullRom(pts) {
-  if (pts.length < 2) return;
-  ctx.moveTo(pts[0][0], pts[0][1]);
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[Math.max(i-1,0)], p1 = pts[i], p2 = pts[i+1], p3 = pts[Math.min(i+2,pts.length-1)];
-    const cp1x = p1[0] + (p2[0]-p0[0])/6, cp1y = p1[1] + (p2[1]-p0[1])/6;
-    const cp2x = p2[0] - (p3[0]-p1[0])/6, cp2y = p2[1] - (p3[1]-p1[1])/6;
-    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2[0], p2[1]);
-  }
-}
-
-function drawLine(data, xFn, yFn, col, lw, dash=[]) {
-  const pts = data.map(d => [xFn(d.y), yFn(d.v)]);
-  ctx.save();
-  ctx.beginPath();
-  ctx.setLineDash(dash);
-  catmullRom(pts);
-  ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = 'round';
-  ctx.stroke(); ctx.restore();
-}
-
-function drawArea(data, xFn, yFn, baseY, col, alpha) {
-  const pts = data.map(d => [xFn(d.y), yFn(d.v)]);
-  if (!pts.length) return;
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(pts[0][0], baseY);
-  catmullRom(pts);
-  ctx.lineTo(pts[pts.length-1][0], baseY);
-  ctx.closePath();
-  ctx.fillStyle = hex2rgba(col, alpha);
-  ctx.fill(); ctx.restore();
-}
-
-function diamond(x, y, sz, fill, stroke) {
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(x, y-sz); ctx.lineTo(x+sz*0.7, y);
-  ctx.lineTo(x, y+sz); ctx.lineTo(x-sz*0.7, y); ctx.closePath();
-  ctx.fillStyle = fill; ctx.fill();
-  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
-  ctx.restore();
-}
-
-function circle(x, y, r, fill, strokeCol, sw=1.2) {
-  ctx.save();
-  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
-  ctx.fillStyle = fill; ctx.fill();
-  if (strokeCol) { ctx.strokeStyle = strokeCol; ctx.lineWidth = sw; ctx.stroke(); }
-  ctx.restore();
-}
-
-function label(txt, x, y, col, size=9, align='left', bold=false) {
-  ctx.save();
-  ctx.font = (bold ? 'bold ' : '') + size + 'px Segoe UI,system-ui,sans-serif';
-  ctx.fillStyle = col; ctx.textAlign = align; ctx.textBaseline = 'top';
-  ctx.fillText(txt, x, y); ctx.restore();
-}
-
-function multiLabel(txt, x, y, col, size, align, above) {
-  const lines = txt.split('\n');
-  const lh = size * 1.25;
-  const total = lines.length * lh;
-  const startY = above ? y - total - 3 : y + 6;
-  lines.forEach((ln, i) => label(ln, x, startY + i*lh, col, size, align));
-}
-
-function addHit(x, y, r, data) { hitTargets.push({x, y, r, data}); }
-
-function tooltip(d) {
-  const t = document.getElementById('tt');
-  document.getElementById('tt-ey').textContent = d.ey || '';
-  document.getElementById('tt-ti').textContent = d.ti || '';
-  document.getElementById('tt-bo').textContent = d.bo || '';
-  const tg = document.getElementById('tt-tg');
-  tg.textContent = d.tg || '';
-  tg.style.background = hex2rgba(d.col||'#888', 0.15);
-  tg.style.color = d.col || '#888';
-  t.classList.add('show');
-}
-
-cv.addEventListener('mousemove', function(e) {
-  const rect = cv.getBoundingClientRect();
-  const mx = (e.clientX - rect.left) * DPR;
-  const my = (e.clientY - rect.top) * DPR;
-  let hit = null;
-  for (const h of hitTargets) {
-    if (Math.hypot(mx-h.x, my-h.y) < h.r) { hit = h; break; }
-  }
-  if (hit) {
-    tooltip(hit.data);
-    const t = document.getElementById('tt');
-    t.style.left = Math.min(e.clientX+16, window.innerWidth-340)+'px';
-    t.style.top  = Math.min(e.clientY-10,  window.innerHeight-240)+'px';
-    cv.style.cursor = 'pointer';
-  } else {
-    document.getElementById('tt').classList.remove('show');
-    cv.style.cursor = 'default';
-  }
-});
-cv.addEventListener('mouseleave', () => document.getElementById('tt').classList.remove('show'));
-
-function draw() {
-  hitTargets.length = 0;
-  const wrap = document.querySelector('.chart-wrap');
-  const cssW = Math.max(400, wrap.getBoundingClientRect().width || wrap.offsetWidth || window.innerWidth);
-  DPR = window.devicePixelRatio || 1;
-  const cssH = Math.max(360, Math.min(520, window.innerHeight * 0.52));
-  cv.width  = cssW * DPR;
-  cv.height = cssH * DPR;
-  cv.style.width  = cssW + 'px';
-  cv.style.height = cssH + 'px';
-  ctx.scale(DPR, DPR);
-  W = cssW; H = cssH;
-  M = {l:54, r:54, t:36, b:38};
-  iW = W - M.l - M.r;
-  iH = H - M.t - M.b;
-
-  ctx.clearRect(0, 0, W, H);
-
-  // ── GRID ────────────────────────────────────────────────────────────────────
-  ctx.save();
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1;
-  [100,120,140,160,180,200,220,240].forEach(v => {
-    const y = ySc(v);
-    ctx.beginPath(); ctx.moveTo(M.l, y); ctx.lineTo(M.l+iW, y); ctx.stroke();
-    label(v, M.l-6, y-5, '#3a4555', 9, 'right');
-  });
-  for (let yr = 1970; yr <= 2030; yr+=5) {
-    const x = xSc(yr);
-    ctx.beginPath(); ctx.moveTo(x, M.t); ctx.lineTo(x, M.t+iH); ctx.stroke();
-    label(yr, x, M.t+iH+6, '#3a4555', 9, 'center');
-  }
-  ctx.restore();
-
-  // Projected zone separator
-  ctx.save();
-  ctx.setLineDash([4,3]); ctx.strokeStyle = 'rgba(100,120,150,0.25)'; ctx.lineWidth = 1;
-  const px26 = xSc(2026);
-  ctx.beginPath(); ctx.moveTo(px26, M.t); ctx.lineTo(px26, M.t+iH); ctx.stroke();
-  ctx.restore();
-  label('PROJECTED', px26+4, M.t+4, 'rgba(100,120,150,0.4)', 8);
-
-  // Y axis label
-  ctx.save(); ctx.translate(13, M.t + iH/2);
-  ctx.rotate(-Math.PI/2);
-  ctx.font = '9px Segoe UI,system-ui,sans-serif';
-  ctx.fillStyle = '#4a5565'; ctx.textAlign = 'center';
-  ctx.fillText('CASE-SHILLER INDEX (INFLATION-ADJUSTED)', 0, 0);
-  ctx.restore();
-
-  // ── SCALE WINDOWS (drawn first behind everything) ───────────────────────────
-  if (has('scale')) {
-    scaleWindows.forEach(w => {
-      const x1=xSc(w.x1), x2=xSc(w.x2), bw=x2-x1;
-      ctx.fillStyle = hex2rgba(w.col, w.q==='best' ? 0.22 : 0.14);
-      ctx.fillRect(x1, M.t, bw, iH);
-      ctx.fillStyle = hex2rgba(w.col, w.q==='best' ? 0.85 : 0.65);
-      ctx.fillRect(x1, M.t, bw, 3);
-      // Label
-      ctx.save(); ctx.font = 'bold 8px Segoe UI,system-ui,sans-serif';
-      ctx.fillStyle = hex2rgba(w.col, 0.85);
-      const tw = ctx.measureText(w.label).width;
-      if (bw > tw + 4) {
-        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-        ctx.fillText(w.label, x1+bw/2, M.t+6);
-      } else {
-        ctx.save(); ctx.translate(x1+bw/2, M.t+iH/2);
-        ctx.rotate(-Math.PI/2); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText(w.label, 0, 0); ctx.restore();
-      }
-      ctx.restore();
-    });
-  }
-
-  // ── WEALTH TRANSFER WAVES ──────────────────────────────────────────────────
-  if (has('inst')) {
-    const bandH = 18;
-    wealthWaves.forEach((w, wi) => {
-      const x1=xSc(w.x1), x2=xSc(Math.min(w.x2,2030)), bw=Math.max(0,x2-x1);
-      const isActive = w.x1 >= 2026;
-      ctx.fillStyle = hex2rgba(w.col, isActive ? 0.09 : 0.055);
-      ctx.fillRect(x1, M.t, bw, iH);
-      ctx.fillStyle = hex2rgba(w.col, isActive ? 0.55 : 0.40);
-      ctx.fillRect(x1, M.t+iH-bandH, bw, bandH);
-      // Wave label in band
-      ctx.save();
-      ctx.font = 'bold 7.5px Segoe UI,system-ui,sans-serif';
-      ctx.fillStyle = hex2rgba(w.col, 0.92);
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      const wlbl = 'W'+(wi+1);
-      ctx.fillText(wlbl, x1+bw/2, M.t+iH-bandH/2);
-      ctx.restore();
-      // Hit target
-      addHit((x1+x2)/2*DPR, (M.t+iH-bandH/2)*DPR, Math.max(20,bw/2*DPR),
-        {ey:w.ey, ti:w.label, bo:w.body+'\n\nKey buyers: '+w.who, tg:w.who, col:w.col});
-    });
-    // Inst event diamonds
-    instEvents.forEach(ev => {
-      const dp = historical.find(d=>d.y===Math.round(ev.y))||{v:155};
-      const cx=xSc(ev.y), cy=ySc(dp.v);
-      diamond(cx, cy, 7, hex2rgba(ev.col,0.25), ev.col);
-      diamond(cx, cy, 4, ev.col, '#07090f');
-      const stemLen = ev.above ? -32 : 32;
-      ctx.save(); ctx.setLineDash([2,2]); ctx.strokeStyle=hex2rgba(ev.col,0.5); ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(cx, ev.above?cy-7:cy+7); ctx.lineTo(cx, cy+stemLen); ctx.stroke();
-      ctx.restore();
-      addHit(cx*DPR, cy*DPR, 20*DPR, {ey:ev.ey, ti:ev.title, bo:ev.body, tg:ev.tag_txt, col:ev.col});
-    });
-  }
-
-  // ── INFLATION ─────────────────────────────────────────────────────────────
-  if (has('infl')) {
-    drawArea(inflationData.filter(d=>d.v>=0), xSc, inflSc, inflSc(0), '#f87171', 0.13);
-    drawLine(inflationData, xSc, inflSc, '#f87171', 1.5);
-    // Zero line
-    ctx.save(); ctx.setLineDash([3,3]); ctx.strokeStyle='rgba(248,113,113,0.2)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(M.l, inflSc(0)); ctx.lineTo(M.l+iW, inflSc(0)); ctx.stroke();
-    ctx.restore();
-    label('CPI%', M.l+iW+6, inflSc(10)-5, 'rgba(248,113,113,0.6)', 8);
-    inflationMarkers.forEach(mk => {
-      const cx=xSc(mk.y), cy=inflSc(mk.v);
-      circle(cx, cy, 4.5, '#f87171', '#07090f');
-      multiLabel(mk.lbl, mk.y>2025?cx-4:cx+5, cy, '#f87171', 8,
-        mk.y>2025?'right':'left', mk.above);
-      addHit(cx*DPR, cy*DPR, 16*DPR, {
-        ey:mk.y+' CPI Inflation', ti:mk.lbl.replace('\n',' — '),
-        bo:'Annual CPI: '+mk.v+'%. High inflation destroys affordability and forces distressed sales. Low inflation enables Fed rate cuts and expands the buyer pool.',
-        tg:'CPI '+mk.v+'%', col:'#f87171'
-      });
-    });
-  }
-
-  // ── DEBT SERVICE / AFFORDABILITY ──────────────────────────────────────────
-  if (has('debt')) {
-    const df = debtServiceData.filter(d=>d.y>=1980);
-    drawArea(df, xSc, debtSc, debtSc(8), '#38bdf8', 0.10);
-    // Avg line
-    ctx.save(); ctx.setLineDash([4,3]); ctx.strokeStyle='rgba(56,189,248,0.35)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(xSc(1980), debtSc(12.52)); ctx.lineTo(xSc(2026), debtSc(12.52)); ctx.stroke();
-    ctx.restore();
-    label('Historical avg 12.52%', xSc(1982), debtSc(12.52)-12, 'rgba(56,189,248,0.45)', 8);
-    drawLine(df, xSc, debtSc, '#38bdf8', 1.5);
-    label('DSR%', M.l+iW+6, debtSc(13)-5, 'rgba(56,189,248,0.6)', 8);
-    debtMilestones.forEach(mk => {
-      const dpt = debtServiceData.find(d=>d.y===mk.y);
-      if (!dpt) return;
-      const cx=xSc(mk.y), cy=debtSc(dpt.v);
-      ctx.save();
-      ctx.fillStyle='rgba(56,189,248,0.75)';
-      ctx.strokeStyle='#07090f'; ctx.lineWidth=1;
-      ctx.fillRect(cx-4.5, cy-4.5, 9, 9);
-      ctx.strokeRect(cx-4.5, cy-4.5, 9, 9);
-      ctx.restore();
-      addHit(cx*DPR, cy*DPR, 18*DPR, {
-        ey:mk.y+' — Consumer Debt / Affordability', ti:mk.lbl,
-        bo:mk.body, tg:mk.stat, col:'#38bdf8'
-      });
-    });
-  }
-
-  // ── BOOMER SELL TIMELINE ──────────────────────────────────────────────────
-  if (has('boom')) {
-    const maxH = 1300;
-    const maxBarH = iH * 0.35;
-    const barW = Math.max(4, (xSc(2025)-xSc(2024)) * 0.55);
-    label('BOOMER HOME RELEASES (est.)', xSc(2024), M.t+iH-maxBarH-12, 'rgba(251,146,60,0.5)', 8);
-    ctx.save();
-    ctx.setLineDash([3,2]); ctx.strokeStyle='rgba(251,146,60,0.35)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(xSc(2026), M.t+iH-maxBarH-5); ctx.lineTo(xSc(2026), M.t+iH); ctx.stroke();
-    ctx.restore();
-    boomerBars.forEach(b => {
-      const bx=xSc(b.y)-barW/2, bh=(b.h/maxH)*maxBarH, by=M.t+iH-bh;
-      ctx.fillStyle = hex2rgba('#fb923c', b.proj ? 0.35 : 0.60);
-      ctx.fillRect(bx, by, barW, bh);
-      if (b.proj) {
-        ctx.save(); ctx.setLineDash([2,2]); ctx.strokeStyle='rgba(251,146,60,0.5)'; ctx.lineWidth=0.8;
-        ctx.strokeRect(bx, by, barW, bh); ctx.restore();
-      }
-      // Label above bar (only if wide enough)
-      if (barW > 16) {
-        ctx.save(); ctx.font='6.5px Segoe UI,system-ui,sans-serif';
-        ctx.fillStyle='rgba(251,146,60,0.85)'; ctx.textAlign='center'; ctx.textBaseline='bottom';
-        ctx.fillText(b.lbl, bx+barW/2, by-1); ctx.restore();
-      }
-      addHit((bx+barW/2)*DPR, (by+bh/2)*DPR, Math.max(16,barW/2*DPR+8),{
-        ey:b.y+(b.proj?' — Projected':' — Estimated'),
-        ti:b.h.toLocaleString()+' boomer households exiting homeownership',
-        bo:b.note+'\n\nFreddie Mac Silver Tide (2024): 32M boomer HHs in 2022 → ~23M by 2035 = 9.2M net exit. ~62% of exits flow through estate/probate — direct feed to wholesale pipeline.',
-        tg:b.proj?'PROJECTED':'ESTIMATED', col:'#fb923c'
-      });
-    });
-  }
-
-  // ── UNEMPLOYMENT ──────────────────────────────────────────────────────────
-  if (has('unemp')) {
-    drawArea(unempData, xSc, unempSc, M.t+iH, '#a78bfa', 0.08);
-    drawLine(unempData, xSc, unempSc, '#a78bfa', 1.5);
-    // Full-employment reference line at 4.5%
-    ctx.save(); ctx.setLineDash([4,3]); ctx.strokeStyle='rgba(167,139,250,0.2)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(M.l, unempSc(4.5)); ctx.lineTo(M.l+iW, unempSc(4.5)); ctx.stroke();
-    ctx.restore();
-    label('U% (full employment ~4.5%)', M.l+iW+4, unempSc(4.5)-5, 'rgba(167,139,250,0.45)', 7);
-    label('U%', M.l+iW+4, unempSc(10)-5, 'rgba(167,139,250,0.6)', 8);
-    unempMarkers.forEach(mk => {
-      const cx=xSc(mk.y), cy=unempSc(mk.v);
-      const col = mk.type==='peak'?'#f87171':mk.type==='low'?'#a78bfa':mk.type==='current'?'#ffb432':'#a78bfa';
-      const sz = mk.type==='peak' ? 5.5 : 4;
-      ctx.save();
-      ctx.beginPath();
-      if (mk.type==='peak') {
-        ctx.moveTo(cx, cy-sz); ctx.lineTo(cx+sz*0.7, cy+sz*0.5); ctx.lineTo(cx-sz*0.7, cy+sz*0.5); ctx.closePath();
-        ctx.fillStyle=col;
-      } else {
-        ctx.arc(cx, cy, sz, 0, Math.PI*2);
-        ctx.fillStyle=col;
-      }
-      ctx.fill();
-      ctx.strokeStyle='#07090f'; ctx.lineWidth=1; ctx.stroke();
-      ctx.restore();
-      // Labels only for key markers to avoid clutter
-      if (['1975','1982','1992','2003','2010','2020','2026'].includes(String(mk.y))) {
-        multiLabel(mk.lbl, cx+(cx>M.l+iW*0.8?-6:6), cy, hex2rgba(col,0.85), 7.5,
-          cx>M.l+iW*0.8?'right':'left', mk.above);
-      }
-      addHit(cx*DPR, cy*DPR, 18*DPR, {
-        ey: mk.y+' — Unemployment Rate',
-        ti: mk.v+'% Unemployment — '+mk.lbl.replace(/\n/g,' '),
-        bo: mk.note+'\n\nKey RE implication: high unemployment = distressed seller peak. Falling unemployment = expanding buyer pool and exit market.',
-        tg: mk.type==='peak'?'UNEMPLOYMENT PEAK':mk.type==='low'?'UNEMPLOYMENT LOW':'CURRENT',
-        col
-      });
-    });
-  }
-
-  // ── MAIN PRICE LINE (drawn after bands, before markers) ─────────────────────
-  const histData = historical.filter(d=>!d.p);
-  const projData = historical.filter(d=>d.p);
-  const bridge = [histData[histData.length-1], ...projData];
-
-  // Area fill
-  const grad = ctx.createLinearGradient(M.l, 0, M.l+iW, 0);
-  grad.addColorStop(0,'rgba(100,60,20,0.18)');
-  grad.addColorStop(0.55,'rgba(200,164,110,0.18)');
-  grad.addColorStop(1,'rgba(224,96,96,0.18)');
-  drawArea(histData, xSc, ySc, M.t+iH, '#c8a46e', 0);
-  ctx.save();
-  const pts0 = histData.map(d=>[xSc(d.y),ySc(d.v)]);
-  ctx.beginPath(); ctx.moveTo(pts0[0][0], M.t+iH);
-  catmullRom(pts0);
-  ctx.lineTo(pts0[pts0.length-1][0], M.t+iH); ctx.closePath();
-  ctx.fillStyle = grad; ctx.fill(); ctx.restore();
-
-  // Glow
-  ctx.save(); ctx.shadowColor='rgba(200,164,110,0.25)'; ctx.shadowBlur=10;
-  drawLine(histData, xSc, ySc, '#c8a46e', 3);
-  ctx.restore();
-  drawLine(histData, xSc, ySc, '#c8a46e', 2.2);
-  drawLine(bridge, xSc, ySc, '#6ab0e8', 1.6, [5,4]);
-
-  // ── EVENT MARKERS ──────────────────────────────────────────────────────────
-  const visLayers = ['war','econ','policy','geo'].filter(l=>has(l));
-  if (visLayers.length) {
-    const vis = events.filter(e => has(e.layer) || (has('war') && e.tag==='current'));
-    vis.forEach(ev => {
-      const dp = historical.find(d=>d.y===Math.round(ev.y))||{v:155};
-      const cx=xSc(ev.y), cy=ySc(dp.v);
-      const stemLen = ev.above ? -28 : 28;
-      ctx.save(); ctx.setLineDash([2,2]); ctx.strokeStyle=hex2rgba(ev.col,0.55); ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx,cy+stemLen); ctx.stroke(); ctx.restore();
-      circle(cx, cy, 10, hex2rgba(ev.col,0.1), hex2rgba(ev.col,0.4), 1);
-      circle(cx, cy, 4.5, ev.col, '#07090f', 1.5);
-      if (ev.tag==='current') {
-        ctx.save(); ctx.setLineDash([3,2]); ctx.strokeStyle=hex2rgba('#ffb432',0.6); ctx.lineWidth=1.5;
-        ctx.beginPath(); ctx.arc(cx,cy,13,0,Math.PI*2); ctx.stroke(); ctx.restore();
-      }
-      addHit(cx*DPR, cy*DPR, 20*DPR, {ey:ev.ey, ti:ev.title, bo:ev.body, tg:ev.tag_txt, col:ev.col});
-    });
-  }
-
-  // ── MEDIAN PRICE MARKERS ───────────────────────────────────────────────────
-  if (has('med')) {
-    medianPrices.forEach((mk,i) => {
-      const cx=xSc(mk.y), cy=ySc(mk.v);
-      const col = mk.type==='peak'?'#f87171':mk.type==='trough'?'#34d399':'#ffb432';
-      const sz = 8;
-      diamond(cx, cy, sz, hex2rgba(col,0.85), '#07090f');
-      const above = mk.type==='peak' || i%2===0;
-      multiLabel(mk.lbl, cx+(cx>M.l+iW*0.82?-8:7), cy, col, 8, cx>M.l+iW*0.82?'right':'left', above);
-      addHit(cx*DPR, cy*DPR, 20*DPR, {
-        ey:mk.y+' — '+(mk.type==='peak'?'Cycle Peak':mk.type==='trough'?'Cycle Trough':'Current'),
-        ti:'Median Home Price: '+mk.p,
-        bo: {
-          1970:'Post-recession trough. Median income ~$8.7K. Price-to-income ~2.6x — historically affordable.',
-          1980:'Rate spike era. 18% mortgage rates meant a $62.9K home cost $750+/mo. Market froze.',
-          1982:'Recession low. Affordability crushed by 15-18% rates despite nominally stable prices.',
-          1989:'S&L era peak. 5-year run driven by deregulated lending. Correction begins 1990.',
-          1993:'Post-S&L trough. RTC selling distressed assets. Best buying window of the 1990s.',
-          2006:'Subprime bubble peak. Price/income ratio exceeded 7x nationally.',
-          2012:'GFC trough. Down 20% from peak. Rates at 3.5%. Historic affordability for those with jobs.',
-          2022:'COVID peak. Low rates + demand surge drove 40%+ gains in 2 years.',
-          2026:'Current stall. Down ~13% from peak. Lock-in effect limiting supply.',
-        }[mk.y]||'',
-        tg:mk.p+(mk.type==='peak'?' CYCLE PEAK':mk.type==='trough'?' CYCLE TROUGH':' CURRENT'),
-        col
-      });
-    });
-  }
-
-  // ── YOU ARE HERE ──────────────────────────────────────────────────────────
-  const now = historical.find(d=>d.y===2026);
-  const nx=xSc(2026), ny=ySc(now.v);
-  ctx.save(); ctx.setLineDash([]); ctx.strokeStyle='rgba(240,232,216,0.35)'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.arc(nx,ny,15,0,Math.PI*2); ctx.stroke(); ctx.restore();
-  circle(nx, ny, 5, '#f0e8d8', '#07090f', 1.5);
-  ctx.save(); ctx.font='7.5px Segoe UI,system-ui,sans-serif';
-  ctx.fillStyle='rgba(240,232,216,0.7)'; ctx.textAlign='right'; ctx.textBaseline='bottom';
-  ctx.fillText('YOU ARE HERE', nx-10, ny-17); ctx.restore();
-}
-
-// ─── SCALE CARDS ──────────────────────────────────────────────────────────────
-function buildScaleCards() {
-  const grid = document.getElementById('scale-grid');
-
-  scaleDetails.forEach(sc => {
-    const card = document.createElement('div');
-    card.className = 'sc-card';
-    card.style.borderLeftColor = sc.col;
-    if (sc.period.includes('2026')) card.style.background = '#130e04';
-    const qBadge = sc.q==='best'
-      ? `<span style="font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(80,184,128,.18);color:${sc.col};font-weight:700;letter-spacing:.06em">${sc.period.includes('2026')?'ACTIVE NOW':'BEST WINDOW'}</span>`
-      : `<span style="font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(106,176,232,.15);color:#6ab0e8;font-weight:700;letter-spacing:.06em">GOOD WINDOW</span>`;
-    const unempBadge = sc.unemp
-      ? `<span style="font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(167,139,250,.15);color:#a78bfa;font-weight:600;letter-spacing:.04em">U: ${sc.unemp}</span>`
-      : '';
-    const stratTags = sc.strats.map(s => {
-      const isNow=sc.period.includes('2026');
-      const bg=isNow?'rgba(255,180,50,.14)':sc.q==='best'?'rgba(80,184,128,.15)':'rgba(106,176,232,.13)';
-      const tc=isNow?'#ffb432':sc.q==='best'?'#50b880':'#6ab0e8';
-      return `<span class="strat-tag" style="background:${bg};color:${tc}">${s}</span>`;
-    }).join('');
-    card.innerHTML = `
-      <div class="sc-head">
-        <span class="sc-title">${sc.label}</span>
-        ${qBadge}
-        ${unempBadge}
-        <span class="sc-period" style="color:${sc.col}">${sc.period}</span>
-      </div>
-      <div class="sc-body">${sc.body}</div>
-      <div class="sc-strats">${stratTags}</div>
-      <div class="sc-why">WHY IT WORKS: ${sc.why}</div>`;
-    grid.appendChild(card);
-  });
-
-  // ── DIVIDER: FORWARD-LOOKING ANALYSIS ──────────────────────────────────────
-  const divider = document.createElement('div');
-  divider.style.cssText = 'grid-column:1/-1;border-top:1px solid #1e2a38;margin:8px 0 4px;padding-top:12px';
-  divider.innerHTML = `<div style="font-size:9px;color:#7a8898;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px">Forward-Looking Analysis — New Structural Drivers (2026-2035)</div>`;
-  grid.appendChild(divider);
-
-  // ── AI DISPLACEMENT CARD ────────────────────────────────────────────────────
-  const aiCard = document.createElement('div');
-  aiCard.className = 'sc-card';
-  aiCard.style.cssText = 'border-left-color:#f59e0b;background:#100d00;grid-column:span 2';
-  aiCard.innerHTML = `
-    <div class="sc-head">
-      <span class="sc-title">${aiDisplacementData.headline}</span>
-      <span style="font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(245,158,11,.18);color:#f59e0b;font-weight:700;letter-spacing:.06em">NEW — NO PRIOR PARALLEL</span>
-      <span class="sc-period" style="color:#f59e0b">2026-2032</span>
-    </div>
-    <div class="sc-body" style="margin-bottom:8px">${aiDisplacementData.summary}</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px;margin-bottom:8px">
-      ${aiDisplacementData.timeline.map(t=>`
-        <div style="background:#1a1500;border:1px solid #2a2000;border-radius:2px;padding:8px 10px">
-          <div style="font-size:8px;font-weight:700;color:#f59e0b;letter-spacing:.06em;margin-bottom:4px">${t.period} — ${t.phase}</div>
-          <div style="font-size:9.5px;color:#b8c4d0;line-height:1.55">${t.detail}</div>
-        </div>`).join('')}
-    </div>
-    <div style="background:#1a1500;border-left:2px solid #f59e0b;padding:8px 10px;margin-bottom:6px;border-radius:0 2px 2px 0">
-      <div style="font-size:8px;font-weight:700;color:#f59e0b;letter-spacing:.06em;margin-bottom:3px">REAL ESTATE IMPLICATION</div>
-      <div style="font-size:9.5px;color:#b8c4d0;line-height:1.55">${aiDisplacementData.reImplication}</div>
-    </div>
-    <div style="background:#1a1500;border-left:2px solid #f59e0b;padding:8px 10px;margin-bottom:6px;border-radius:0 2px 2px 0">
-      <div style="font-size:8px;font-weight:700;color:#f59e0b;letter-spacing:.06em;margin-bottom:3px">TARGET & AVOID METROS</div>
-      <div style="font-size:9.5px;color:#b8c4d0;line-height:1.55">${aiDisplacementData.metros}</div>
-    </div>
-    <div style="font-size:8px;color:#4a5565;margin-top:4px;font-style:italic">Sources: ${aiDisplacementData.sources}</div>`;
-  grid.appendChild(aiCard);
-
-  // ── ASSUMABLE MORTGAGE CARD ────────────────────────────────────────────────
-  const assCard = document.createElement('div');
-  assCard.className = 'sc-card';
-  assCard.style.cssText = 'border-left-color:#34d399;background:#001a0d';
-  assCard.innerHTML = `
-    <div class="sc-head">
-      <span class="sc-title">${assumableMortgageData.headline}</span>
-      <span style="font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(52,211,153,.18);color:#34d399;font-weight:700;letter-spacing:.06em">TIME-LIMITED EDGE</span>
-      <span class="sc-period" style="color:#34d399">${assumableMortgageData.window}</span>
-    </div>
-    <div class="sc-body">${assumableMortgageData.body}</div>
-    <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
-      <span class="strat-tag" style="background:rgba(52,211,153,.15);color:#34d399">Cash Flow: ${assumableMortgageData.cashflow}</span>
-    </div>
-    <div class="sc-why">STRATEGY: ${assumableMortgageData.strategy}</div>`;
-  grid.appendChild(assCard);
-
-  // ── UNEMPLOYMENT-REAL ESTATE CORRELATION CARD ──────────────────────────────
-  const unempCard = document.createElement('div');
-  unempCard.className = 'sc-card';
-  unempCard.style.cssText = 'border-left-color:#a78bfa;background:#080010';
-  unempCard.innerHTML = `
-    <div class="sc-head">
-      <span class="sc-title">Unemployment as a Distressed Deal Predictor</span>
-      <span style="font-size:8px;padding:2px 8px;border-radius:2px;background:rgba(167,139,250,.18);color:#a78bfa;font-weight:700;letter-spacing:.06em">55-YEAR PATTERN</span>
-    </div>
-    <div class="sc-body">Every major wholesale window in this dataset was preceded by or concurrent with a significant unemployment spike. The pattern is consistent across all five best windows:<br><br>
-    <span style="color:#a78bfa;font-weight:600">Unemployment peak → Distressed seller peak (6-18 month lag) → Buyer pool begins recovery → Appreciation begins.</span><br><br>
-    Current unemployment at 4.1% is rising from a 54-year low. The direction matters more than the level. A move from 4.1% to 6-7% — likely under an AI displacement + Iran war + rate-high scenario — would replicate the entry conditions of both 1992 and 2010. The operators with capital deployed <span style="font-style:italic">before</span> unemployment peaks have historically captured the full distress cycle upside.</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin:8px 0">
-      ${[
-        {w:'1975-78',u:'8.5% peak',r:'Best window'},
-        {w:'1982-86',u:'9.7% peak',r:'Best window'},
-        {w:'1992-97',u:'7.5% peak',r:'Best window'},
-        {w:'2009-13',u:'9.6% peak',r:'Best window'},
-        {w:'2026-30',u:'4.1%→rising',r:'CURRENT'},
-      ].map(r=>`<div style="background:#110020;border:1px solid #2a1a40;border-radius:2px;padding:6px 8px;text-align:center">
-        <div style="font-size:8px;color:#a78bfa;font-weight:700">${r.w}</div>
-        <div style="font-size:9px;color:#e8e2d5;margin:2px 0">${r.u}</div>
-        <div style="font-size:7.5px;color:#50b880">${r.r}</div>
-      </div>`).join('')}
-    </div>
-    <div class="sc-why">PATTERN: Unemployment peak = distressed seller peak. Enter before the peak. Hold through the recovery.</div>`;
-  grid.appendChild(unempCard);
-}
-
-function init() {
-  buildScaleCards();
-  draw();
-  setTimeout(draw, 150);
-}
-if (document.readyState==='loading') {
-  document.addEventListener('DOMContentLoaded', () => requestAnimationFrame(init));
-} else {
-  requestAnimationFrame(init);
-}
-window.addEventListener('resize', () => { clearTimeout(window._rt); window._rt = setTimeout(draw,80); });
-
 </script>
 </body>
 </html>
