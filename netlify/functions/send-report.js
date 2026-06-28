@@ -1,0 +1,130 @@
+const { Resend } = require("resend");
+
+const OWNER_EMAIL = "steve@tallbridgerealestate.com";
+
+function statusLabel(status) {
+  if (status === "pass") return { text: "PASS", color: "#1A7F4E", bg: "#EDFAF3" };
+  if (status === "warn") return { text: "NEEDS WORK", color: "#C47A1A", bg: "#FEF8EC" };
+  return { text: "MISSING", color: "#C0392B", bg: "#FEF0EE" };
+}
+
+function buildEmailHtml(url, reportData) {
+  const { score, grade, summary, criteria = [], topPriorities = [] } = reportData;
+
+  const gradeColor =
+    grade === "Strong Foundation" ? "#1A7F4E" :
+    grade === "Getting There" ? "#C47A1A" :
+    grade === "Needs Work" ? "#C47A1A" : "#C0392B";
+
+  const criteriaRows = criteria.map((c) => {
+    const s = statusLabel(c.status);
+    const steps = (c.steps || []).map((st, i) => `<li style="margin-bottom:6px">${st}</li>`).join("");
+    return `
+      <div style="border:1px solid #e2e0dc;border-radius:8px;overflow:hidden;margin-bottom:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff">
+          <span style="font-size:14px;font-weight:600;color:#0D0D0D">${c.name}</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:${s.bg};color:${s.color}">${s.text}</span>
+        </div>
+        <div style="padding:14px 16px;background:#fafaf8;border-top:1px solid #e2e0dc">
+          <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#6B6B6B;margin:0 0 4px">What We Found</p>
+          <p style="font-size:13px;color:#0D0D0D;margin:0 0 12px;line-height:1.6">${c.finding}</p>
+          <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#6B6B6B;margin:0 0 4px">Why It Matters</p>
+          <p style="font-size:13px;color:#6B6B6B;margin:0 0 12px;line-height:1.6">${c.why}</p>
+          ${steps ? `<p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:${s.color};margin:0 0 6px">How To Fix It</p>
+          <ol style="margin:0;padding-left:18px;font-size:13px;color:#0D0D0D;line-height:1.6">${steps}</ol>` : ""}
+        </div>
+      </div>`;
+  }).join("");
+
+  const priorityItems = topPriorities.map((p, i) => `
+    <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px">
+      <div style="width:24px;height:24px;border-radius:50%;background:#E85A1C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">${i + 1}</div>
+      <p style="font-size:13px;color:#0D0D0D;line-height:1.6;margin:3px 0 0">${p}</p>
+    </div>`).join("");
+
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"/></head><body style="margin:0;padding:0;background:#f0efed;font-family:system-ui,-apple-system,sans-serif">
+  <div style="max-width:620px;margin:32px auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08)">
+    <!-- Header -->
+    <div style="background:#0D0D0D;padding:20px 28px;display:flex;align-items:center;gap:12px">
+      <div style="width:36px;height:36px;background:#E85A1C;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px">DG</div>
+      <div>
+        <div style="font-weight:700;color:#fff;font-size:15px">Digital Growth OS</div>
+        <div style="font-size:10px;color:#888;letter-spacing:.08em;text-transform:uppercase">Website Audit Report</div>
+      </div>
+    </div>
+    <!-- Score block -->
+    <div style="background:#0D0D0D;padding:24px 28px">
+      <p style="font-size:11px;color:#888;margin:0 0 4px">${url}</p>
+      <p style="font-size:22px;font-weight:800;color:${gradeColor};margin:0 0 8px">${grade}</p>
+      <p style="font-size:13px;color:#aaa;line-height:1.6;margin:0 0 16px">${summary}</p>
+      <div style="display:flex;gap:4px">
+        ${Array.from({ length: 10 }, (_, i) =>
+          `<div style="flex:1;height:5px;border-radius:3px;background:${i < score ? gradeColor : "#333"}"></div>`
+        ).join("")}
+      </div>
+      <p style="font-size:11px;color:#666;margin:8px 0 0">${score}/10 points passing</p>
+    </div>
+    <!-- Top priorities -->
+    ${topPriorities.length ? `
+    <div style="padding:24px 28px;background:#FFF0E8;border-bottom:1px solid #e2e0dc">
+      <p style="font-size:14px;font-weight:800;color:#0D0D0D;margin:0 0 16px">Your Top 3 Priorities Right Now</p>
+      ${priorityItems}
+    </div>` : ""}
+    <!-- Criteria -->
+    <div style="padding:24px 28px">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#6B6B6B;margin:0 0 14px">Full 10-Point Report</p>
+      ${criteriaRows}
+    </div>
+    <!-- Footer -->
+    <div style="padding:16px 28px;background:#f5f4f2;border-top:1px solid #e2e0dc;text-align:center">
+      <p style="font-size:11px;color:#999;margin:0">Generated by Digital Growth OS &middot; <a href="https://digital-growth-os.netlify.app" style="color:#E85A1C;text-decoration:none">digital-growth-os.netlify.app</a></p>
+    </div>
+  </div>
+  </body></html>`;
+}
+
+exports.handler = async (event) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Content-Type": "application/json",
+  };
+
+  if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
+  }
+
+  let email, reportData, url;
+  try {
+    ({ email, reportData, url } = JSON.parse(event.body));
+  } catch {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid request body" }) };
+  }
+
+  if (!email || !reportData || !url) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "email, reportData, and url are required" }) };
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const html = buildEmailHtml(url, reportData);
+  const subject = `Your Digital Growth OS Audit — ${url}`;
+
+  // Send to user
+  await resend.emails.send({
+    from: "Digital Growth OS <reports@digitalgrowth.os>",
+    to: email,
+    subject,
+    html,
+  });
+
+  // Notify owner
+  await resend.emails.send({
+    from: "Digital Growth OS <reports@digitalgrowth.os>",
+    to: OWNER_EMAIL,
+    subject: `New audit lead: ${url} — ${email}`,
+    html: `<p>New audit completed.</p><p><strong>Site:</strong> ${url}<br/><strong>Requested by:</strong> ${email}<br/><strong>Score:</strong> ${reportData.score}/10 — ${reportData.grade}</p>` + html,
+  });
+
+  return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+};
