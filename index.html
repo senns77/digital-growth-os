@@ -13,16 +13,16 @@
   --green:#1A7F4E;--green-bg:#EDFAF3;
   --red:#C0392B;--red-bg:#FEF0EE;
   --warn:#C47A1A;--warn-bg:#FEF8EC;
-  --border:#222;
+  --border:#222;--border2:#2a2a2a;
 }
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden;line-height:1.6}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:32px;height:32px;background:var(--orange);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;letter-spacing:.02em;flex-shrink:0}
-.logo-text{font-weight:700;font-size:14px;color:var(--white)}
+.logo-mark{width:32px;height:32px;background:var(--orange);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
+.logo-text{font-weight:700;font-size:14px}
 .logo-sub{font-size:10px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
 .nav-cta{background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 18px;border-radius:4px;text-decoration:none;transition:background .18s}
 .nav-cta:hover{background:var(--orange2)}
@@ -30,86 +30,148 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.95
 /* HERO */
 #hero{padding:110px 24px 80px;max-width:780px;margin:0 auto;text-align:center}
 .hero-tag{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(232,90,28,.35);border-radius:20px;padding:4px 14px;margin-bottom:24px}
-#hero h1{font-size:clamp(28px,5vw,52px);font-weight:800;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+#hero h1{font-size:clamp(26px,5vw,52px);font-weight:800;color:var(--white);line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
 #hero h1 span{color:var(--orange)}
-.hero-sub{font-size:clamp(15px,2vw,19px);color:#aaa;max-width:540px;margin:0 auto 36px;line-height:1.65}
+.hero-sub{font-size:clamp(14px,2vw,18px);color:#aaa;max-width:520px;margin:0 auto 36px;line-height:1.65}
 
 /* URL FORM */
 .url-form{display:flex;gap:0;max-width:540px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px var(--border)}
-.url-form input{flex:1;background:var(--black2);border:none;color:var(--white);font-size:15px;padding:14px 18px;outline:none;font-family:inherit}
+.url-form input{flex:1;background:var(--black2);border:none;color:var(--white);font-size:15px;padding:14px 18px;outline:none;font-family:inherit;min-width:0}
 .url-form input::placeholder{color:var(--gray2)}
-.url-form button{background:var(--orange);color:#fff;border:none;font-size:13px;font-weight:700;letter-spacing:.04em;padding:14px 22px;cursor:pointer;white-space:nowrap;transition:background .18s;font-family:inherit}
-.url-form button:hover{background:var(--orange2)}
-.form-confirm{display:none;margin-top:14px;font-size:14px;color:#50b880;font-weight:600;text-align:center}
-.form-confirm.show{display:block}
+.url-form button{background:var(--orange);color:#fff;border:none;font-size:13px;font-weight:700;letter-spacing:.04em;padding:14px 22px;cursor:pointer;white-space:nowrap;transition:background .18s;font-family:inherit;flex-shrink:0}
+.url-form button:hover:not(:disabled){background:var(--orange2)}
+.url-form button:disabled{opacity:.6;cursor:not-allowed}
+
+/* SPINNER */
+.spinner{display:none;width:20px;height:20px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:20px auto 0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{display:none;text-align:center;color:var(--gray);font-size:13px;margin-top:12px}
 
 /* SECTION SCAFFOLDING */
 section{padding:72px 24px}
 .section-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;text-align:center}
-.section-title{font-size:clamp(22px,3vw,34px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:12px;letter-spacing:-.01em;text-align:center}
-.section-sub{font-size:15px;color:#aaa;max-width:580px;margin:0 auto 44px;line-height:1.7;text-align:center}
+.section-title{font-size:clamp(20px,3vw,32px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:12px;letter-spacing:-.01em;text-align:center}
+.section-sub{font-size:14px;color:#aaa;max-width:560px;margin:0 auto 44px;line-height:1.7;text-align:center}
 hr.div{border:none;border-top:1px solid var(--border)}
+
+/* AUDIT RESULTS */
+#results{display:none;padding:60px 24px}
+.results-inner{max-width:680px;margin:0 auto}
+
+/* SCORE BLOCK */
+.score-block{background:var(--black2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;display:flex;align-items:center;gap:24px}
+.score-circle{width:80px;height:80px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:3px solid var(--orange)}
+.score-num{font-size:28px;font-weight:800;line-height:1}
+.score-denom{font-size:11px;color:var(--gray)}
+.score-right{flex:1;min-width:0}
+.score-url{font-size:11px;color:var(--gray);margin-bottom:4px}
+.score-grade{font-size:20px;font-weight:800;margin-bottom:8px}
+.score-summary{font-size:13px;color:#aaa;line-height:1.6}
+.score-bar{display:flex;gap:4px;margin-top:16px}
+.score-bar-seg{flex:1;height:5px;border-radius:3px;background:var(--border2)}
+
+/* CRITERION CARDS */
+.criteria-section{margin-bottom:32px}
+.criteria-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.criteria-label span{font-size:14px}
+.c-card{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;transition:border-color .2s}
+.c-card.open{border-color:var(--orange)}
+.c-card-head{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--black2);cursor:pointer;user-select:none}
+.c-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.c-name{flex:1;font-size:14px;font-weight:600;color:var(--white)}
+.c-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em;flex-shrink:0}
+.c-badge.pass{background:var(--green-bg);color:var(--green)}
+.c-badge.warn{background:var(--warn-bg);color:var(--warn)}
+.c-badge.fail{background:var(--red-bg);color:var(--red)}
+.c-chevron{font-size:10px;color:var(--gray);transition:transform .2s;flex-shrink:0}
+.c-card.open .c-chevron{transform:rotate(180deg)}
+.c-body{display:none;border-top:1px solid var(--border);background:var(--black)}
+.c-card.open .c-body{display:block}
+.c-section{padding:14px 16px}
+.c-section+.c-section{border-top:1px solid #1a1a1a}
+.c-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-bottom:5px}
+.c-section-text{font-size:13px;line-height:1.65;color:var(--white)}
+.c-section-text.muted{color:#aaa}
+.c-steps{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0}
+.c-step{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.6;color:var(--white)}
+.c-step-num{width:22px;height:22px;border-radius:50%;background:var(--black2);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* PRIORITIES */
+.priorities-block{background:#1a0e00;border:1.5px solid rgba(232,90,28,.3);border-radius:10px;padding:22px;margin-bottom:28px}
+.priorities-title{font-size:16px;font-weight:800;color:var(--white);margin-bottom:16px}
+.priority-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.priority-item:last-child{margin-bottom:0}
+.priority-num{width:24px;height:24px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+.priority-text{font-size:13px;line-height:1.6;color:var(--white)}
+
+/* EMAIL CAPTURE */
+.email-block{background:var(--black2);border:1px solid var(--border);border-radius:10px;padding:28px;margin-top:28px;text-align:center}
+.email-block h3{font-size:17px;font-weight:700;color:var(--white);margin-bottom:8px}
+.email-block p{font-size:13px;color:#aaa;margin-bottom:20px;line-height:1.6}
+.email-form{display:flex;gap:0;max-width:420px;margin:0 auto;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px var(--border)}
+.email-form input{flex:1;background:var(--black3);border:none;color:var(--white);font-size:14px;padding:12px 16px;outline:none;font-family:inherit;min-width:0}
+.email-form input::placeholder{color:var(--gray2)}
+.email-form button{background:var(--orange);color:#fff;border:none;font-size:12px;font-weight:700;letter-spacing:.04em;padding:12px 18px;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .18s;flex-shrink:0}
+.email-form button:hover:not(:disabled){background:var(--orange2)}
+.email-form button:disabled{opacity:.6;cursor:not-allowed}
+.email-confirm{display:none;margin-top:14px;font-size:14px;color:var(--green);font-weight:600}
+.email-confirm.show{display:block}
 
 /* PROBLEM CARDS */
 #problems{background:var(--black2)}
-.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:900px;margin:0 auto}
-.p-card{background:var(--black3);padding:28px 26px}
-.p-icon{font-size:28px;margin-bottom:14px}
-.p-title{font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:860px;margin:0 auto}
+.p-card{background:var(--black3);padding:26px}
+.p-icon{font-size:26px;margin-bottom:12px}
+.p-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:7px}
 .p-body{font-size:13px;color:#aaa;line-height:1.65}
 
-/* AUDIT PREVIEW */
+/* AUDIT PREVIEW (static) */
 #preview{background:var(--black)}
-.preview-wrap{max-width:580px;margin:0 auto;background:var(--black2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.preview-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.preview-header .dot{width:8px;height:8px;border-radius:50%;background:var(--orange)}
-.preview-header .label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.preview-wrap{max-width:560px;margin:0 auto;background:var(--black2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.preview-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.preview-dot{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.preview-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
 .audit-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1a1a1a}
 .audit-row:last-child{border-bottom:none}
 .audit-name{font-size:13px;color:var(--white);font-weight:500}
-.badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em}
-.badge.pass{background:var(--green-bg);color:var(--green)}
-.badge.warn{background:var(--warn-bg);color:var(--warn)}
-.badge.fail{background:var(--red-bg);color:var(--red)}
-.preview-footer{padding:14px 20px;background:#111;border-top:1px solid var(--border);font-size:11px;color:var(--gray);text-align:center}
+.preview-footer{padding:13px 20px;background:#111;border-top:1px solid var(--border);font-size:11px;color:var(--gray);text-align:center}
 
 /* CASE STUDY */
 #case{background:var(--black2)}
-.case-title{font-size:clamp(18px,2.5vw,26px);font-weight:800;color:var(--white);margin-bottom:6px;text-align:center;line-height:1.3}
-.case-sub{font-size:13px;color:var(--gray);text-align:center;margin-bottom:36px}
-.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:740px;margin:0 auto}
-@media(max-width:600px){.case-grid{grid-template-columns:1fr}}
-.case-col{background:var(--black3);border:1px solid var(--border);border-radius:8px;padding:24px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px;margin:0 auto}
+@media(max-width:580px){.case-grid{grid-template-columns:1fr}}
+.case-col{background:var(--black3);border:1px solid var(--border);border-radius:8px;padding:22px}
 .case-col.before{border-top:3px solid var(--red)}
 .case-col.after{border-top:3px solid var(--green)}
-.col-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.col-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
 .case-col.before .col-label{color:var(--red)}
 .case-col.after .col-label{color:var(--green)}
-.case-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;font-size:13px;color:#ccc;line-height:1.5}
+.case-item{display:flex;gap:9px;align-items:flex-start;margin-bottom:11px;font-size:13px;color:#ccc;line-height:1.5}
 .case-item:last-child{margin-bottom:0}
-.case-item .icon{flex-shrink:0;font-size:14px;margin-top:1px}
+.case-item .icon{flex-shrink:0;font-size:13px;margin-top:2px}
 
 /* HOW IT WORKS */
 #how{background:var(--black)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:700px;margin:0 auto}
-.step{text-align:center;padding:20px}
-.step-num{width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-.step-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;max-width:680px;margin:0 auto}
+.step{text-align:center;padding:18px}
+.step-num{width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 13px}
+.step-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:5px}
 .step-body{font-size:13px;color:#aaa;line-height:1.6}
 
 /* BOTTOM CTA */
 #cta-bottom{background:var(--black2);padding:80px 24px;text-align:center}
-#cta-bottom h2{font-size:clamp(22px,3.5vw,38px);font-weight:800;color:var(--white);margin-bottom:12px;letter-spacing:-.01em}
-#cta-bottom p{font-size:15px;color:#aaa;margin-bottom:36px}
+#cta-bottom h2{font-size:clamp(20px,3.5vw,36px);font-weight:800;color:var(--white);margin-bottom:12px;letter-spacing:-.01em}
+#cta-bottom p{font-size:15px;color:#aaa;margin-bottom:32px}
 
 /* FOOTER */
 footer{background:var(--black);border-top:1px solid var(--border);padding:20px 24px;text-align:center;font-size:12px;color:var(--gray2)}
 
 /* RESPONSIVE */
 @media(max-width:540px){
-  .url-form{flex-direction:column;border-radius:8px}
-  .url-form input,.url-form button{border-radius:0;width:100%}
+  .url-form,.email-form{flex-direction:column;border-radius:8px}
+  .url-form input,.url-form button,.email-form input,.email-form button{width:100%}
   nav{padding:0 16px}
+  .score-block{flex-direction:column;text-align:center}
 }
 </style>
 </head>
@@ -132,14 +194,20 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
   <div class="hero-tag">Free 10-Point Website Audit</div>
   <h1>Your Website Is <span>Losing You Business.</span> You Just Don't Know It Yet.</h1>
   <p class="hero-sub">Your website has one job. Find out if it's actually doing it — free, in 60 seconds.</p>
-  <div class="url-form">
+  <div class="url-form" id="hero-form">
     <input type="text" id="hero-url" placeholder="yourwebsite.com" autocomplete="off"/>
-    <button onclick="submitAudit('hero-url','hero-confirm')">Audit My Site →</button>
+    <button id="hero-btn" onclick="startAudit('hero-url','hero-btn')">Audit My Site →</button>
   </div>
-  <div class="form-confirm" id="hero-confirm">✓ Got it — we'll send your full 10-point report within 24 hours</div>
+  <div class="spinner" id="hero-spinner"></div>
+  <div class="loading-msg" id="hero-loading">Auditing your site — this takes about 20 seconds…</div>
 </section>
 
-<hr class="div"/>
+<!-- LIVE RESULTS (hidden until audit runs) -->
+<section id="results">
+  <div class="results-inner" id="results-inner"></div>
+</section>
+
+<hr class="div" id="div1"/>
 
 <!-- PROBLEM CARDS -->
 <section id="problems">
@@ -159,34 +227,31 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
     <div class="p-card">
       <div class="p-icon">📉</div>
       <div class="p-title">Visitors Leave Without Contacting You</div>
-      <div class="p-body">The average website converts less than 2% of visitors. That means 98 out of every 100 people who find you — leave without ever reaching out. That's fixable, and it's costing you every single day.</div>
+      <div class="p-body">The average website converts less than 2% of visitors. That means 98 out of every 100 people who find you leave without ever reaching out. That's fixable, and it's costing you every single day.</div>
     </div>
   </div>
 </section>
 
 <hr class="div"/>
 
-<!-- AUDIT PREVIEW -->
+<!-- AUDIT PREVIEW (static demo) -->
 <section id="preview">
   <div class="section-tag">The Audit</div>
   <div class="section-title">Here's what we check — all 10 points</div>
   <p class="section-sub">Every audit covers both traditional website health and AI search readiness. Most businesses fail 6 or more of these checks.</p>
   <div class="preview-wrap">
-    <div class="preview-header">
-      <div class="dot"></div>
-      <div class="label">Sample Audit Report — yourwebsite.com</div>
-    </div>
-    <div class="audit-row"><span class="audit-name">Clear Value Proposition</span><span class="badge warn">NEEDS WORK</span></div>
-    <div class="audit-row"><span class="audit-name">Trust Signals</span><span class="badge fail">MISSING</span></div>
-    <div class="audit-row"><span class="audit-name">Lead Capture</span><span class="badge fail">MISSING</span></div>
-    <div class="audit-row"><span class="audit-name">Buyer-Ready Descriptions</span><span class="badge warn">NEEDS WORK</span></div>
-    <div class="audit-row"><span class="audit-name">Mobile Readable</span><span class="badge pass">PASS</span></div>
-    <div class="audit-row"><span class="audit-name">SEO Basics</span><span class="badge fail">MISSING</span></div>
-    <div class="audit-row"><span class="audit-name">AI Discoverability</span><span class="badge fail">MISSING</span></div>
-    <div class="audit-row"><span class="audit-name">Structured Content for AI</span><span class="badge fail">MISSING</span></div>
-    <div class="audit-row"><span class="audit-name">Google Business Profile</span><span class="badge warn">NEEDS WORK</span></div>
-    <div class="audit-row"><span class="audit-name">Citation Footprint</span><span class="badge warn">NEEDS WORK</span></div>
-    <div class="preview-footer">Your real report includes findings, why it matters, and step-by-step fixes for each point.</div>
+    <div class="preview-header"><div class="preview-dot"></div><div class="preview-lbl">Sample Report — yourwebsite.com</div></div>
+    <div class="audit-row"><span class="audit-name">Clear Value Proposition</span><span class="c-badge warn">NEEDS WORK</span></div>
+    <div class="audit-row"><span class="audit-name">Trust Signals</span><span class="c-badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Lead Capture</span><span class="c-badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Buyer-Ready Descriptions</span><span class="c-badge warn">NEEDS WORK</span></div>
+    <div class="audit-row"><span class="audit-name">Mobile Readable</span><span class="c-badge pass">PASS</span></div>
+    <div class="audit-row"><span class="audit-name">SEO Basics</span><span class="c-badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">AI Discoverability</span><span class="c-badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Structured Content for AI</span><span class="c-badge fail">MISSING</span></div>
+    <div class="audit-row"><span class="audit-name">Google Business Profile</span><span class="c-badge warn">NEEDS WORK</span></div>
+    <div class="audit-row"><span class="audit-name">Citation Footprint</span><span class="c-badge warn">NEEDS WORK</span></div>
+    <div class="preview-footer">Your real report includes findings, why it matters, and step-by-step fixes for every point.</div>
   </div>
 </section>
 
@@ -195,8 +260,8 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
 <!-- CASE STUDY -->
 <section id="case">
   <div class="section-tag">Real Example</div>
-  <div class="case-title">720 Instruments — 11 years in business. Invisible online.</div>
-  <div class="case-sub">A real audit. A real business. Every issue is fixable without a developer.</div>
+  <div class="section-title">720 Instruments — 11 years in business. Invisible online.</div>
+  <p class="section-sub">A real audit. Every issue is fixable without a developer.</p>
   <div class="case-grid">
     <div class="case-col before">
       <div class="col-label">Before the Audit</div>
@@ -224,21 +289,9 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
   <div class="section-tag">How It Works</div>
   <div class="section-title">Three steps. Zero cost.</div>
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-title">Enter your website address</div>
-      <div class="step-body">Just your URL. No login, no credit card, no commitment required.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-title">We audit all 10 points</div>
-      <div class="step-body">We review your site against every item — traditional SEO and AI search readiness.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-title">Get your report with step-by-step fixes</div>
-      <div class="step-body">You get a full written report with specific, actionable fixes you can implement yourself.</div>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-title">Enter your website address</div><div class="step-body">Just your URL. No login, no credit card, no commitment.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">We audit all 10 points</div><div class="step-body">We review your site against every criterion — traditional SEO and AI search readiness.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">Get your report with fixes</div><div class="step-body">A full written report with specific, actionable steps you can do yourself.</div></div>
   </div>
 </section>
 
@@ -250,31 +303,215 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
   <p>Find out exactly what's holding your website back — free, within 24 hours.</p>
   <div class="url-form" style="max-width:540px;margin:0 auto">
     <input type="text" id="bottom-url" placeholder="yourwebsite.com" autocomplete="off"/>
-    <button onclick="submitAudit('bottom-url','bottom-confirm')">Audit My Site →</button>
+    <button id="bottom-btn" onclick="startAudit('bottom-url','bottom-btn')">Audit My Site →</button>
   </div>
-  <div class="form-confirm" id="bottom-confirm">✓ Got it — we'll send your full 10-point report within 24 hours</div>
+  <div class="spinner" id="bottom-spinner"></div>
+  <div class="loading-msg" id="bottom-loading">Auditing your site — this takes about 20 seconds…</div>
 </section>
 
 <!-- FOOTER -->
 <footer>© 2026 Digital Growth OS</footer>
 
 <script>
-function submitAudit(inputId, confirmId) {
+let currentReport = null;
+
+// ── AUDIT ENGINE ──────────────────────────────────────────────────────────────
+async function startAudit(inputId, btnId) {
   const input = document.getElementById(inputId);
-  const val = input.value.trim();
-  if (!val) { input.focus(); return; }
-  input.disabled = true;
-  input.closest('.url-form').querySelector('button').disabled = true;
-  document.getElementById(confirmId).classList.add('show');
+  const btn   = document.getElementById(btnId);
+  const spinnerId  = inputId === 'hero-url' ? 'hero-spinner' : 'bottom-spinner';
+  const loadingId  = inputId === 'hero-url' ? 'hero-loading' : 'bottom-loading';
+
+  let url = input.value.trim();
+  if (!url) { input.focus(); return; }
+
+  // Disable all forms while running
+  document.querySelectorAll('.url-form input, .url-form button').forEach(el => el.disabled = true);
+  document.getElementById(spinnerId).style.display  = 'block';
+  document.getElementById(loadingId).style.display  = 'block';
+
+  try {
+    const res = await fetch('/api/audit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+
+    if (!res.ok) throw new Error('Audit failed — please try again.');
+    const report = await res.json();
+    currentReport = report;
+    renderResults(report, url);
+  } catch (err) {
+    alert(err.message || 'Something went wrong. Please try again.');
+  } finally {
+    document.querySelectorAll('.url-form input, .url-form button').forEach(el => el.disabled = false);
+    document.getElementById(spinnerId).style.display  = 'none';
+    document.getElementById(loadingId).style.display  = 'none';
+  }
 }
+
 document.querySelectorAll('.url-form input').forEach(input => {
   input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const btn = this.closest('.url-form').querySelector('button');
-      btn.click();
-    }
+    if (e.key === 'Enter') this.closest('.url-form').querySelector('button').click();
   });
 });
+
+// ── RENDER RESULTS ────────────────────────────────────────────────────────────
+function gradeColor(grade) {
+  if (grade === 'Strong Foundation') return '#1A7F4E';
+  if (grade === 'Getting There')     return '#C47A1A';
+  if (grade === 'Needs Work')        return '#C47A1A';
+  return '#C0392B';
+}
+
+function dotColor(status) {
+  return status === 'pass' ? '#1A7F4E' : status === 'warn' ? '#C47A1A' : '#C0392B';
+}
+
+function badgeClass(status) {
+  return status === 'pass' ? 'pass' : status === 'warn' ? 'warn' : 'fail';
+}
+
+function badgeText(status) {
+  return status === 'pass' ? 'PASS' : status === 'warn' ? 'NEEDS WORK' : 'MISSING';
+}
+
+function renderResults(report, rawUrl) {
+  const { url, score = 0, grade = '', summary = '', criteria = [], topPriorities = [] } = report;
+  const gc = gradeColor(grade);
+  const displayUrl = url || rawUrl;
+
+  // Score bar
+  const barSegs = Array.from({ length: 10 }, (_, i) =>
+    `<div class="score-bar-seg" style="${i < score ? `background:${gc}` : ''}"></div>`
+  ).join('');
+
+  // Criteria sections
+  const traditional = criteria.slice(0, 6);
+  const ai = criteria.slice(6);
+
+  function renderCriteria(list) {
+    return list.map((c, idx) => {
+      const dc = dotColor(c.status);
+      const steps = (c.steps || []).map((s, i) =>
+        `<li class="c-step"><span class="c-step-num">${i+1}</span><span>${s}</span></li>`
+      ).join('');
+      return `
+        <div class="c-card" id="card-${idx}-${c.name.replace(/\s/g,'_')}">
+          <div class="c-card-head" onclick="toggleCard(this.parentElement)">
+            <div class="c-dot" style="background:${dc}"></div>
+            <div class="c-name">${c.name}</div>
+            <span class="c-badge ${badgeClass(c.status)}">${badgeText(c.status)}</span>
+            <span class="c-chevron">▼</span>
+          </div>
+          <div class="c-body">
+            <div class="c-section">
+              <div class="c-section-label">What We Found</div>
+              <div class="c-section-text">${c.finding || ''}</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-label">Why This Matters</div>
+              <div class="c-section-text muted">${c.why || ''}</div>
+            </div>
+            ${steps ? `<div class="c-section">
+              <div class="c-section-label" style="color:${dc}">${c.status === 'pass' ? "What's Working" : "How To Fix It"}</div>
+              <ul class="c-steps">${steps}</ul>
+            </div>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // Priorities
+  const priorityHtml = topPriorities.map((p, i) => `
+    <div class="priority-item">
+      <div class="priority-num">${i+1}</div>
+      <div class="priority-text">${p}</div>
+    </div>`).join('');
+
+  const html = `
+    <!-- Score block -->
+    <div class="score-block">
+      <div class="score-circle" style="border-color:${gc}">
+        <div class="score-num" style="color:${gc}">${score}</div>
+        <div class="score-denom">/ 10</div>
+      </div>
+      <div class="score-right">
+        <div class="score-url">${displayUrl}</div>
+        <div class="score-grade" style="color:${gc}">${grade}</div>
+        <div class="score-summary">${summary}</div>
+        <div class="score-bar">${barSegs}</div>
+      </div>
+    </div>
+
+    <!-- Priorities -->
+    ${topPriorities.length ? `<div class="priorities-block">
+      <div class="priorities-title">Your Top 3 Priorities Right Now</div>
+      ${priorityHtml}
+    </div>` : ''}
+
+    <!-- Traditional criteria -->
+    <div class="criteria-section">
+      <div class="criteria-label"><span>🌐</span> Traditional Website</div>
+      ${renderCriteria(traditional)}
+    </div>
+
+    <!-- AI criteria -->
+    <div class="criteria-section">
+      <div class="criteria-label"><span>🤖</span> AI Search Readiness</div>
+      ${renderCriteria(ai)}
+    </div>
+
+    <!-- Email capture -->
+    <div class="email-block">
+      <h3>Want to save this report?</h3>
+      <p>Enter your email and we'll send you the full report with all findings and fixes.</p>
+      <div class="email-form">
+        <input type="email" id="report-email" placeholder="your@email.com" autocomplete="email"/>
+        <button id="email-btn" onclick="sendReport()">Send My Report</button>
+      </div>
+      <div class="email-confirm" id="email-confirm">✓ Report sent — check your inbox</div>
+    </div>`;
+
+  const resultsEl = document.getElementById('results');
+  document.getElementById('results-inner').innerHTML = html;
+  resultsEl.style.display = 'block';
+
+  // Scroll to results
+  setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+
+// ── SEND REPORT ───────────────────────────────────────────────────────────────
+async function sendReport() {
+  const emailEl = document.getElementById('report-email');
+  const btn     = document.getElementById('email-btn');
+  const email   = emailEl.value.trim();
+  if (!email || !email.includes('@')) { emailEl.focus(); return; }
+  if (!currentReport) return;
+
+  btn.disabled  = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch('/api/send-report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, reportData: currentReport, url: currentReport.url })
+    });
+    if (!res.ok) throw new Error('Failed to send');
+    document.getElementById('email-confirm').classList.add('show');
+    emailEl.disabled = true;
+    btn.style.display = 'none';
+  } catch {
+    btn.disabled    = false;
+    btn.textContent = 'Send My Report';
+    alert('Could not send the report. Please try again.');
+  }
+}
 </script>
 </body>
 </html>
