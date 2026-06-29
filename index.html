@@ -199,7 +199,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
     <button id="hero-btn" onclick="startAudit('hero-url','hero-btn')">Audit My Site →</button>
   </div>
   <div class="spinner" id="hero-spinner"></div>
-  <div class="loading-msg" id="hero-loading">Auditing your site — this takes about 20 seconds…</div>
+  <div class="loading-msg" id="hero-loading">Auditing your site — this usually takes 30-40 seconds, please keep this page open...</div>
 </section>
 
 <!-- LIVE RESULTS (hidden until audit runs) -->
@@ -306,7 +306,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:20px 2
     <button id="bottom-btn" onclick="startAudit('bottom-url','bottom-btn')">Audit My Site →</button>
   </div>
   <div class="spinner" id="bottom-spinner"></div>
-  <div class="loading-msg" id="bottom-loading">Auditing your site — this takes about 20 seconds…</div>
+  <div class="loading-msg" id="bottom-loading">Auditing your site — this usually takes 30-40 seconds, please keep this page open...</div>
 </section>
 
 <!-- FOOTER -->
@@ -332,7 +332,7 @@ async function startAudit(inputId, btnId) {
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 38000);
+    const timeoutId = setTimeout(() => controller.abort(), 120000);
 
     const res = await fetch('/api/audit', {
       method: 'POST',
