@@ -72,6 +72,30 @@ exports.handler = async (event) => {
   console.log("API key present:", !!apiKey);
   console.log("Auditing URL:", url);
 
+  // Fetch the site content
+  let siteText = "";
+  try {
+    const siteResponse = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; AuditBot/1.0)" },
+      signal: AbortSignal.timeout(10000),
+    });
+    const html = await siteResponse.text();
+    siteText = html
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 8000);
+    console.log("Site content fetched, length:", siteText.length);
+  } catch (fetchErr) {
+    console.log("Site fetch failed (will audit by URL only):", fetchErr.message);
+  }
+
+  const userMessage = siteText
+    ? `Please audit this website: ${url}\n\nHere is the actual text content from the homepage:\n---\n${siteText}\n---\n\nUse this content to score all 10 criteria accurately. If content is missing from the page text it should be scored as FAIL or WARN, not PASS.`
+    : `Please audit this website: ${url}\n\nNote: the page content could not be fetched automatically. Audit based on what you know about this URL, but be conservative — score as WARN or FAIL when you cannot confirm content is present.`;
+
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -84,7 +108,7 @@ exports.handler = async (event) => {
         model: "claude-haiku-4-5-20251001",
         max_tokens: 4000,
         system: SYSTEM_PROMPT,
-        messages: [{ role: "user", content: `Audit this website and return the JSON report: ${url}` }],
+        messages: [{ role: "user", content: userMessage }],
       }),
     });
 
