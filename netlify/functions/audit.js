@@ -1,6 +1,3 @@
-// Use native fetch (Node 18+) or fall back to node-fetch
-const fetchFn = globalThis.fetch || require("node-fetch");
-
 const SYSTEM_PROMPT = `You are a website auditor. Given a URL, score it on 10 criteria and return ONLY valid JSON — no markdown, no explanation.
 
 Format:
@@ -57,7 +54,7 @@ exports.handler = async (event) => {
   console.log("Auditing URL:", url);
 
   try {
-    const response = await fetchFn("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
         "x-api-key": apiKey,
@@ -65,7 +62,7 @@ exports.handler = async (event) => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
+        model: "claude-sonnet-4-6",
         max_tokens: 1500,
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: `Audit this website and return the JSON report: ${url}` }],
@@ -97,7 +94,7 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers, body: JSON.stringify(report) };
 
   } catch (err) {
-    console.log("Fetch/network error:", err.message);
+    console.log("Fetch error:", err.message);
     return { statusCode: 500, headers, body: JSON.stringify({ error: err.message || "Audit failed" }) };
   }
 };
