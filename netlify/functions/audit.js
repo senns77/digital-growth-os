@@ -1,45 +1,27 @@
-const Anthropic = require("@anthropic-ai/sdk");
+const SYSTEM_PROMPT = `You are a website auditor. Given a URL, score it on 10 criteria and return ONLY valid JSON — no markdown, no explanation.
 
-const SYSTEM_PROMPT = `You are a plain-English website auditor for business owners aged 40+ who are not technical. You will be given a website URL. Fetch and analyse that site, then score it against 6 traditional criteria and 4 AI readiness criteria.
+Format:
+{"url":"string","score":0,"grade":"string","summary":"2 sentences.","criteria":[{"name":"string","status":"pass","finding":"1-2 sentences.","why":"1 sentence.","fix":"One action.","steps":["Step 1","Step 2","Step 3"]}],"topPriorities":["Priority 1","Priority 2","Priority 3"]}
 
-Return ONLY valid JSON — no markdown, no code fences, no explanation — in exactly this format:
-{
-  "url": "string",
-  "score": 0,
-  "grade": "Needs Urgent Attention",
-  "summary": "2 sentences plain English summary.",
-  "criteria": [
-    {
-      "name": "string",
-      "status": "pass",
-      "finding": "1-2 sentences describing what you found.",
-      "why": "1-2 sentences explaining why this matters in plain English.",
-      "fix": "One specific action they can take today.",
-      "steps": ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]
-    }
-  ],
-  "topPriorities": ["Priority 1", "Priority 2", "Priority 3"]
-}
+Grade: 0-3="Needs Urgent Attention", 4-5="Needs Work", 6-7="Getting There", 8-10="Strong Foundation".
+Status: "pass", "warn", or "fail".
 
-Grade scale: score 0-3 = "Needs Urgent Attention", 4-5 = "Needs Work", 6-7 = "Getting There", 8-10 = "Strong Foundation".
+10 criteria in order:
+1. Clear Value Proposition
+2. Trust Signals
+3. Lead Capture
+4. Buyer-Ready Descriptions
+5. Mobile Readable
+6. SEO Basics
+7. AI Discoverability
+8. Structured Content for AI
+9. Google Business Profile
+10. Citation Footprint
 
-The 10 criteria in this exact order:
-1. Clear Value Proposition (traditional)
-2. Trust Signals (traditional)
-3. Lead Capture (traditional)
-4. Buyer-Ready Descriptions (traditional)
-5. Mobile Readable (traditional)
-6. SEO Basics (traditional)
-7. AI Discoverability (AI readiness)
-8. Structured Content for AI (AI readiness)
-9. Google Business Profile (AI readiness)
-10. Citation Footprint (AI readiness)
-
-Status values: "pass" (doing well), "warn" (needs improvement), "fail" (missing or broken).
-Be specific and honest. Name actual page elements you can verify. Write at a grade-8 reading level.`;
+Write at a grade-8 reading level for non-technical business owners.`;
 
 exports.handler = async (event) => {
-  console.log("audit function called, method:", event.httpMethod);
+  console.log("audit called, method:", event.httpMethod);
 
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -71,23 +53,36 @@ exports.handler = async (event) => {
   console.log("Auditing URL:", url);
 
   try {
-    const client = new Anthropic({ apiKey });
-
-    const message = await client.messages.create({
-      model: "claude-sonnet-4-6",
-      max_tokens: 4000,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: "user", content: `Please audit this website and return the JSON report: ${url}` }],
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1500,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: "user", content: `Audit this website and return the JSON report: ${url}` }],
+      }),
     });
 
-    let raw = message.content[0].text.trim();
+    if (!response.ok) {
+      const errText = await response.text();
+      console.log("Anthropic API error status:", response.status, errText);
+      return { statusCode: 502, headers, body: JSON.stringify({ error: `Anthropic API error: ${response.status}` }) };
+    }
+
+    const data = await response.json();
+    let raw = data.content[0].text.trim();
     raw = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
 
     let report;
     try {
       report = JSON.parse(raw);
     } catch (parseErr) {
-      console.log("JSON parse error:", parseErr.message, "Raw:", raw.substring(0, 200));
+      console.log("JSON parse error:", parseErr.message, "Raw start:", raw.substring(0, 200));
       return { statusCode: 502, headers, body: JSON.stringify({ error: "Failed to parse audit response", raw }) };
     }
 
@@ -95,7 +90,7 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers, body: JSON.stringify(report) };
 
   } catch (err) {
-    console.log("Anthropic API error:", err.message);
+    console.log("Fetch error:", err.message);
     return { statusCode: 500, headers, body: JSON.stringify({ error: err.message || "Audit failed" }) };
   }
 };
