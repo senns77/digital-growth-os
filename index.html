@@ -59,10 +59,10 @@ hr.div{border:none;border-top:1px solid var(--border)}
 .results-inner{max-width:680px;margin:0 auto}
 
 /* SCORE BLOCK */
-.score-block{background:var(--black2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;display:flex;align-items:center;gap:24px}
-.score-circle{width:80px;height:80px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:3px solid var(--orange)}
-.score-num{font-size:28px;font-weight:800;line-height:1}
-.score-denom{font-size:11px;color:var(--gray)}
+.score-block{background:var(--black2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;display:flex;align-items:center;gap:28px}
+.score-circle{width:110px;height:110px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:4px solid var(--orange);box-shadow:0 0 0 8px rgba(232,90,28,.08)}
+.score-num{font-size:40px;font-weight:800;line-height:1}
+.score-denom{font-size:12px;color:var(--gray)}
 .score-right{flex:1;min-width:0}
 .score-url{font-size:11px;color:var(--gray);margin-bottom:4px}
 .score-grade{font-size:20px;font-weight:800;margin-bottom:8px}
@@ -71,10 +71,11 @@ hr.div{border:none;border-top:1px solid var(--border)}
 .score-bar-seg{flex:1;height:5px;border-radius:3px;background:var(--border2)}
 
 /* CRITERION CARDS */
-.criteria-section{margin-bottom:32px}
-.criteria-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.criteria-section{margin-bottom:36px}
+.criteria-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .criteria-label span{font-size:14px}
-.c-card{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;transition:border-color .2s}
+.criteria-divider{border:none;border-top:1px solid var(--border);margin:8px 0 32px}
+.c-card{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;transition:border-color .2s}
 .c-card.open{border-color:var(--orange)}
 .c-card-head{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--black2);cursor:pointer;user-select:none}
 .c-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
@@ -97,7 +98,7 @@ hr.div{border:none;border-top:1px solid var(--border)}
 .c-step-num{width:22px;height:22px;border-radius:50%;background:var(--black2);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
 
 /* PRIORITIES */
-.priorities-block{background:#1a0e00;border:1.5px solid rgba(232,90,28,.3);border-radius:10px;padding:22px;margin-bottom:28px}
+.priorities-block{background:#1c0f00;border:1.5px solid rgba(232,90,28,.4);border-radius:10px;padding:24px 26px;margin-bottom:32px;box-shadow:0 0 0 4px rgba(232,90,28,.06)}
 .priorities-title{font-size:16px;font-weight:800;color:var(--white);margin-bottom:16px}
 .priority-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
 .priority-item:last-child{margin-bottom:0}
@@ -465,6 +466,7 @@ function renderResults(report, rawUrl) {
     </div>
 
     <!-- AI criteria -->
+    <hr class="criteria-divider"/>
     <div class="criteria-section">
       <div class="criteria-label"><span>🤖</span> AI Search Readiness</div>
       ${renderCriteria(ai)}
@@ -479,14 +481,43 @@ function renderResults(report, rawUrl) {
         <button id="email-btn" onclick="sendReport()">Send My Report</button>
       </div>
       <div class="email-confirm" id="email-confirm">✓ Report sent — check your inbox</div>
+    </div>
+
+    <!-- Reset button -->
+    <div style="text-align:center;margin-top:40px;padding-bottom:20px">
+      <button onclick="resetPage()" style="background:transparent;border:1px solid var(--border);color:var(--gray);font-size:13px;padding:10px 24px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor='var(--orange)';this.style.color='var(--orange)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--gray)'">← Audit Another Site</button>
     </div>`;
 
   const resultsEl = document.getElementById('results');
   document.getElementById('results-inner').innerHTML = html;
   resultsEl.style.display = 'block';
 
+  // Hide all landing page sections below results
+  ['div1','problems','preview','case','how','cta-bottom'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
   // Scroll to results
   setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function resetPage() {
+  // Hide results
+  const resultsEl = document.getElementById('results');
+  resultsEl.style.display = 'none';
+  document.getElementById('results-inner').innerHTML = '';
+  currentReport = null;
+
+  // Restore all landing page sections
+  ['div1','problems','preview','case','how','cta-bottom'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = '';
+  });
+
+  // Clear the URL inputs and scroll to top
+  document.querySelectorAll('.url-form input').forEach(el => el.value = '');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function toggleCard(card) {
