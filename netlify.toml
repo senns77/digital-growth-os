@@ -9,10 +9,10 @@
   node_bundler = "esbuild"
 
 [functions."audit"]
-  timeout = 26
+  timeout = 60
 
 [functions."send-report"]
-  timeout = 26
+  timeout = 60
 
 [[redirects]]
   from = "/api/*"
