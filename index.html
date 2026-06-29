@@ -331,18 +331,26 @@ async function startAudit(inputId, btnId) {
   document.getElementById(loadingId).style.display  = 'block';
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 38000);
+
     const res = await fetch('/api/audit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url })
+      body: JSON.stringify({ url }),
+      signal: controller.signal
     });
+    clearTimeout(timeoutId);
 
     if (!res.ok) throw new Error('Audit failed — please try again.');
     const report = await res.json();
     currentReport = report;
     renderResults(report, url);
   } catch (err) {
-    alert(err.message || 'Something went wrong. Please try again.');
+    const msg = err.name === 'AbortError'
+      ? 'The audit is taking longer than expected — please try again.'
+      : (err.message || 'Something went wrong. Please try again.');
+    alert(msg);
   } finally {
     document.querySelectorAll('.url-form input, .url-form button').forEach(el => el.disabled = false);
     document.getElementById(spinnerId).style.display  = 'none';
