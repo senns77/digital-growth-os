@@ -1,24 +1,26 @@
-const SYSTEM_PROMPT = `You are a website auditor. Given a URL, score it on 10 criteria and return ONLY valid JSON — no markdown, no explanation.
+const SYSTEM_PROMPT = `You are a website auditor. Audit the given URL and return ONLY valid JSON — no markdown, no explanation, no extra text.
 
-Format:
+JSON format:
 {"url":"string","score":0,"grade":"string","summary":"2 sentences.","criteria":[{"name":"string","status":"pass","finding":"1-2 sentences.","why":"1 sentence.","fix":"One action.","steps":["Step 1","Step 2","Step 3"]}],"topPriorities":["Priority 1","Priority 2","Priority 3"]}
 
-Grade: 0-3="Needs Urgent Attention", 4-5="Needs Work", 6-7="Getting There", 8-10="Strong Foundation".
-Status: "pass", "warn", or "fail".
+Grade: 0-3="Needs Urgent Attention" 4-5="Needs Work" 6-7="Getting There" 8-10="Strong Foundation"
+Status: "pass" "warn" "fail"
 
-10 criteria in order:
-1. Clear Value Proposition
-2. Trust Signals
-3. Lead Capture
-4. Buyer-Ready Descriptions
-5. Mobile Readable
-6. SEO Basics
-7. AI Discoverability
-8. Structured Content for AI
-9. Google Business Profile
-10. Citation Footprint
+Score each criterion pass/warn/fail. Score = number of "pass" results.
 
-Write at a grade-8 reading level for non-technical business owners.`;
+Criteria (score all 10):
+1. Clear Value Proposition — does the homepage instantly say what the business does and who it helps?
+2. Trust Signals — are there reviews, testimonials, credentials, or social proof visible?
+3. Lead Capture — is there a clear call-to-action to contact, book, or buy?
+4. Buyer-Ready Descriptions — do service/product pages describe outcomes, not just features?
+5. Mobile Readable — does the site display and function well on a phone?
+6. SEO Basics — does the site have a title tag, meta description, and header structure?
+7. AI Discoverability — would an AI like ChatGPT or Claude mention this business when asked about relevant services?
+8. Structured Content for AI — does the site use clear headings, lists, and FAQs that AI can parse?
+9. Google Business Profile — does the business have a claimed, complete Google Business Profile?
+10. Citation Footprint — is the business listed consistently across directories like Yelp, BBB, and industry sites?
+
+Write at a grade-8 reading level. Be specific — name actual page elements you observe.`;
 
 exports.handler = async (event) => {
   console.log("audit called, method:", event.httpMethod);
@@ -63,7 +65,7 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-6",
-        max_tokens: 1500,
+        max_tokens: 4000,
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: `Audit this website and return the JSON report: ${url}` }],
       }),
