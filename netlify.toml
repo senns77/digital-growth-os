@@ -1,6 +1,5 @@
 [build]
   publish = "."
-  command = "echo 'No build step needed'"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -9,7 +8,10 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-[functions.audit]
+[functions."audit"]
+  timeout = 26
+
+[functions."send-report"]
   timeout = 26
 
 [[redirects]]
