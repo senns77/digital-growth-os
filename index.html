@@ -386,7 +386,7 @@ function badgeText(status) {
 }
 
 function renderResults(report, rawUrl) {
-  const { url, score = 0, grade = '', summary = '', criteria = [], topPriorities = [] } = report;
+  const { url, businessType = '', score = 0, grade = '', summary = '', criteria = [], topPriorities = [] } = report;
   const gc = gradeColor(grade);
   const displayUrl = url || rawUrl;
 
@@ -446,12 +446,15 @@ function renderResults(report, rawUrl) {
         <div class="score-denom">/ 10</div>
       </div>
       <div class="score-right">
-        <div class="score-url">${displayUrl}</div>
+        <div class="score-url">${displayUrl}${businessType ? ` <span style="color:#555;font-size:10px;margin-left:6px">· ${businessType}</span>` : ''}</div>
         <div class="score-grade" style="color:${gc}">${grade}</div>
         <div class="score-summary">${summary}</div>
         <div class="score-bar">${barSegs}</div>
       </div>
     </div>
+
+    <!-- Disclaimer -->
+    <p style="font-size:11px;color:#555;font-style:italic;text-align:center;margin:-8px 0 24px;line-height:1.6">Our audit is intentionally strict. We score what is actually present — not potential. This gives you an accurate picture of what visitors experience.</p>
 
     <!-- Priorities -->
     ${topPriorities.length ? `<div class="priorities-block">
