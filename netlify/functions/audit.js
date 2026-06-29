@@ -1,3 +1,6 @@
+// Use native fetch (Node 18+) or fall back to node-fetch
+const fetchFn = globalThis.fetch || require("node-fetch");
+
 const SYSTEM_PROMPT = `You are a website auditor. Given a URL, score it on 10 criteria and return ONLY valid JSON — no markdown, no explanation.
 
 Format:
@@ -22,6 +25,7 @@ Write at a grade-8 reading level for non-technical business owners.`;
 
 exports.handler = async (event) => {
   console.log("audit called, method:", event.httpMethod);
+  console.log("Node version:", process.version);
 
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -53,7 +57,7 @@ exports.handler = async (event) => {
   console.log("Auditing URL:", url);
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetchFn("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
         "x-api-key": apiKey,
@@ -61,20 +65,22 @@ exports.handler = async (event) => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
+        model: "claude-haiku-4-5-20251001",
         max_tokens: 1500,
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: `Audit this website and return the JSON report: ${url}` }],
       }),
     });
 
+    const responseText = await response.text();
+    console.log("Anthropic response status:", response.status);
+
     if (!response.ok) {
-      const errText = await response.text();
-      console.log("Anthropic API error status:", response.status, errText);
+      console.log("Anthropic error body:", responseText.substring(0, 300));
       return { statusCode: 502, headers, body: JSON.stringify({ error: `Anthropic API error: ${response.status}` }) };
     }
 
-    const data = await response.json();
+    const data = JSON.parse(responseText);
     let raw = data.content[0].text.trim();
     raw = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
 
@@ -82,7 +88,8 @@ exports.handler = async (event) => {
     try {
       report = JSON.parse(raw);
     } catch (parseErr) {
-      console.log("JSON parse error:", parseErr.message, "Raw start:", raw.substring(0, 200));
+      console.log("JSON parse error:", parseErr.message);
+      console.log("Raw response start:", raw.substring(0, 300));
       return { statusCode: 502, headers, body: JSON.stringify({ error: "Failed to parse audit response", raw }) };
     }
 
@@ -90,7 +97,7 @@ exports.handler = async (event) => {
     return { statusCode: 200, headers, body: JSON.stringify(report) };
 
   } catch (err) {
-    console.log("Fetch error:", err.message);
+    console.log("Fetch/network error:", err.message);
     return { statusCode: 500, headers, body: JSON.stringify({ error: err.message || "Audit failed" }) };
   }
 };
