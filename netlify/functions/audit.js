@@ -39,16 +39,15 @@ Status values: "pass" (doing well), "warn" (needs improvement), "fail" (missing 
 Be specific and honest. Name actual page elements you can verify. Write at a grade-8 reading level.`;
 
 exports.handler = async (event) => {
+  console.log("audit function called, method:", event.httpMethod);
+
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json",
   };
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers, body: "" };
-  }
-
+  if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
@@ -56,7 +55,8 @@ exports.handler = async (event) => {
   let url;
   try {
     ({ url } = JSON.parse(event.body));
-  } catch {
+  } catch (e) {
+    console.log("Body parse error:", e.message);
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid request body" }) };
   }
 
@@ -64,37 +64,38 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "URL is required" }) };
   }
 
-  // Normalise URL
   if (!/^https?:\/\//i.test(url)) url = "https://" + url;
 
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  console.log("API key present:", !!apiKey);
+  console.log("Auditing URL:", url);
 
-  const message = await client.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 4000,
-    system: SYSTEM_PROMPT,
-    messages: [
-      {
-        role: "user",
-        content: `Please audit this website and return the JSON report: ${url}`,
-      },
-    ],
-  });
-
-  let raw = message.content[0].text.trim();
-  // Strip any accidental markdown fences
-  raw = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
-
-  let report;
   try {
-    report = JSON.parse(raw);
-  } catch {
-    return {
-      statusCode: 502,
-      headers,
-      body: JSON.stringify({ error: "Failed to parse audit response", raw }),
-    };
-  }
+    const client = new Anthropic({ apiKey });
 
-  return { statusCode: 200, headers, body: JSON.stringify(report) };
+    const message = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 4000,
+      system: SYSTEM_PROMPT,
+      messages: [{ role: "user", content: `Please audit this website and return the JSON report: ${url}` }],
+    });
+
+    let raw = message.content[0].text.trim();
+    raw = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
+
+    let report;
+    try {
+      report = JSON.parse(raw);
+    } catch (parseErr) {
+      console.log("JSON parse error:", parseErr.message, "Raw:", raw.substring(0, 200));
+      return { statusCode: 502, headers, body: JSON.stringify({ error: "Failed to parse audit response", raw }) };
+    }
+
+    console.log("Audit complete, score:", report.score);
+    return { statusCode: 200, headers, body: JSON.stringify(report) };
+
+  } catch (err) {
+    console.log("Anthropic API error:", err.message);
+    return { statusCode: 500, headers, body: JSON.stringify({ error: err.message || "Audit failed" }) };
+  }
 };
