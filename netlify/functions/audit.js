@@ -6,21 +6,29 @@ JSON format:
 Grade: 0-3="Needs Urgent Attention" 4-5="Needs Work" 6-7="Getting There" 8-10="Strong Foundation"
 Status: "pass" "warn" "fail"
 
-Score each criterion pass/warn/fail. Score = number of "pass" results.
+Score each criterion using EXACTLY these rules:
+- PASS (1 point): Clear evidence this exists and works well on the site.
+- WARN (0 points): Exists but incomplete or needs significant improvement.
+- FAIL (0 points): Missing entirely.
+Total score = number of PASS criteria only. Be strict.
+A basic contact page does NOT count as lead capture.
+A logo does NOT count as trust signals.
+Generic page titles like "Home" do NOT count as SEO basics.
+Only award PASS if the evidence is clearly present and effective.
 
 Criteria (score all 10):
-1. Clear Value Proposition — does the homepage instantly say what the business does and who it helps?
-2. Trust Signals — are there reviews, testimonials, credentials, or social proof visible?
-3. Lead Capture — is there a clear call-to-action to contact, book, or buy?
-4. Buyer-Ready Descriptions — do service/product pages describe outcomes, not just features?
-5. Mobile Readable — does the site display and function well on a phone?
-6. SEO Basics — does the site have a title tag, meta description, and header structure?
-7. AI Discoverability — would an AI like ChatGPT or Claude mention this business when asked about relevant services?
-8. Structured Content for AI — does the site use clear headings, lists, and FAQs that AI can parse?
-9. Google Business Profile — does the business have a claimed, complete Google Business Profile?
-10. Citation Footprint — is the business listed consistently across directories like Yelp, BBB, and industry sites?
+1. Clear Value Proposition — does the homepage headline instantly say what the business does and who it helps, in plain language?
+2. Trust Signals — are there real reviews, testimonials, case studies, credentials, or awards visible (not just a logo)?
+3. Lead Capture — is there a prominent, specific CTA to book, buy, or request a quote (not just a generic "contact us")?
+4. Buyer-Ready Descriptions — do service/product pages describe outcomes and benefits, not just a list of features?
+5. Mobile Readable — does the site display and function well on a phone, with readable text and tappable buttons?
+6. SEO Basics — does the site have a unique descriptive title tag, meta description, and proper H1/H2 header structure?
+7. AI Discoverability — would an AI like ChatGPT mention this business when asked about relevant local services?
+8. Structured Content for AI — does the site use clear headings, bullet lists, and FAQs that AI tools can easily parse?
+9. Google Business Profile — does the business have a claimed, complete, and recently-updated Google Business Profile?
+10. Citation Footprint — is the business listed consistently (name, address, phone) across Yelp, BBB, and relevant directories?
 
-Write at a grade-8 reading level. Be specific — name actual page elements you observe.`;
+Write at a grade-8 reading level. Name actual page elements you observe.`;
 
 exports.handler = async (event) => {
   console.log("audit called, method:", event.httpMethod);
