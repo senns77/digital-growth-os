@@ -72,28 +72,56 @@ exports.handler = async (event) => {
   console.log("API key present:", !!apiKey);
   console.log("Auditing URL:", url);
 
-  // Fetch the site content
-  let siteText = "";
-  try {
-    const siteResponse = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; AuditBot/1.0)" },
-      signal: AbortSignal.timeout(10000),
-    });
-    const html = await siteResponse.text();
-    siteText = html
-      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 15000);
-    console.log("Site content fetched, length:", siteText.length);
-  } catch (fetchErr) {
-    console.log("Site fetch failed (will audit by URL only):", fetchErr.message);
+  // Helper: fetch a URL and return cleaned text, or null on failure
+  async function fetchPage(pageUrl, timeoutMs) {
+    try {
+      const res = await fetch(pageUrl, {
+        headers: { "User-Agent": "Mozilla/5.0 (compatible; AuditBot/1.0)" },
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+      if (!res.ok) return null;
+      const html = await res.text();
+      return html
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    } catch {
+      return null;
+    }
   }
 
+  // Fetch homepage + additional pages in parallel
+  const additionalUrls = [
+    url + "/about",
+    url + "/about-us",
+    url + "/contact",
+    url + "/contact-us",
+    url + "/services",
+    url + "/products",
+  ];
+
+  const [homepageText, ...additionalTexts] = await Promise.all([
+    fetchPage(url, 10000),
+    ...additionalUrls.map(u => fetchPage(u, 5000)),
+  ]);
+
+  // Collect pages that returned content
+  const pages = [];
+  if (homepageText) pages.push({ label: "Homepage", text: homepageText });
+  additionalUrls.forEach((u, i) => {
+    if (additionalTexts[i]) pages.push({ label: u.replace(url, ""), text: additionalTexts[i] });
+  });
+
+  // Cap total at 20000 chars split evenly across pages
+  const TOTAL_CAP = 20000;
+  const perPage = pages.length > 0 ? Math.floor(TOTAL_CAP / pages.length) : TOTAL_CAP;
+  const siteText = pages.map(p => `[${p.label}]\n${p.text.slice(0, perPage)}`).join("\n\n");
+  console.log(`Pages fetched: ${pages.length}, total content length: ${siteText.length}`);
+
   const userMessage = siteText
-    ? `Please audit this website: ${url}\n\nHere is the actual text content from the homepage:\n---\n${siteText}\n---\n\nUse this content to score all 10 criteria accurately. If content is missing from the page text it should be scored as FAIL or WARN, not PASS.`
+    ? `Please audit this website: ${url}\n\nHere is the actual text content from ${pages.length} page(s):\n---\n${siteText}\n---\n\nUse this content to score all 10 criteria accurately. If content is missing from the page text it should be scored as FAIL or WARN, not PASS.`
     : `Please audit this website: ${url}\n\nNote: the page content could not be fetched automatically. Audit based on what you know about this URL, but be conservative — score as WARN or FAIL when you cannot confirm content is present.`;
 
   try {
@@ -106,7 +134,7 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 4000,
+        max_tokens: 6000,
         system: SYSTEM_PROMPT,
         messages: [{ role: "user", content: userMessage }],
       }),
