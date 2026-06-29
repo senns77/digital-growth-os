@@ -86,7 +86,7 @@ exports.handler = async (event) => {
       .replace(/<[^>]+>/g, " ")
       .replace(/\s+/g, " ")
       .trim()
-      .slice(0, 8000);
+      .slice(0, 15000);
     console.log("Site content fetched, length:", siteText.length);
   } catch (fetchErr) {
     console.log("Site fetch failed (will audit by URL only):", fetchErr.message);
